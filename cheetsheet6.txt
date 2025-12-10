@@ -1,0 +1,91 @@
+SQL コマンド チートシート + 実行サンプル
+======================================
+
+前提: items(id, name, price, created_at), users(id, name, active), orders(id, user_id, total, created_at)
+
+1. まず覚える 5 行 (SELECT)
+- 基本: SELECT name, price FROM items;
+- 条件: SELECT * FROM items WHERE price >= 1000 AND name LIKE 'A%';
+- 並び替え: SELECT * FROM items ORDER BY price DESC, id ASC;
+- 上位 n 件: SELECT * FROM items ORDER BY price DESC LIMIT 5 OFFSET 0; -- SQL Server: SELECT TOP 5 * FROM items ORDER BY price DESC;
+- 別名: SELECT i.name AS item_name, i.price FROM items AS i;
+
+2. CRUD 超基本 (手を動かす例)
+- 追加 1 行: INSERT INTO items (name, price) VALUES ('Apple', 120);
+- 追加 複数: INSERT INTO items (name, price) VALUES ('Banana', 80), ('Coffee', 450);
+- 更新: UPDATE items SET price = 500 WHERE name = 'Coffee';
+- 削除: DELETE FROM items WHERE name = 'Banana'; -- WHERE 無しは全削除
+
+3. WHERE で使う代表句 (例)
+- 比較: SELECT * FROM items WHERE price > 300;
+- 部分一致: SELECT * FROM items WHERE name LIKE '%off%';
+- 集合: SELECT * FROM items WHERE name IN ('Apple','Coffee');
+- 範囲: SELECT * FROM items WHERE price BETWEEN 100 AND 500;
+- 論理: SELECT * FROM items WHERE (price > 300 AND name LIKE 'C%') OR price < 100;
+
+4. 集計の定番 3 手 (例)
+- COUNT: SELECT COUNT(*) AS cnt FROM items;
+- GROUP BY: SELECT active, COUNT(*) FROM users GROUP BY active;
+- HAVING: SELECT active, COUNT(*) c FROM users GROUP BY active HAVING c >= 2;
+
+5. JOIN はこれだけで動く (例)
+- 内部結合: SELECT o.id, u.name, o.total FROM orders o INNER JOIN users u ON o.user_id = u.id;
+- 左外結合: SELECT u.id, u.name, o.total FROM users u LEFT JOIN orders o ON u.id = o.user_id; -- ユーザーは必ず残す
+- USING: SELECT * FROM orders o JOIN users u USING (id); -- 共通列が id の例
+
+6. サブクエリと集合 (例)
+- IN サブクエリ: SELECT * FROM users WHERE id IN (SELECT user_id FROM orders WHERE total > 1000);
+- EXISTS: SELECT * FROM users u WHERE EXISTS (SELECT 1 FROM orders o WHERE o.user_id = u.id AND o.total > 500);
+- UNION: SELECT name FROM users UNION SELECT name FROM items; -- ALL なら重複を保持
+
+7. 文字列/日付のよく使う形 (例)
+- 連結: SELECT CONCAT(name, ' (', price, ')') AS label FROM items; -- SQLite/PG は name || ' (' || price || ')'
+- 部分: SELECT SUBSTR(name, 1, 3) FROM items; -- PG: SUBSTRING(name FROM 1 FOR 3)
+- 長さ: SELECT LENGTH(name) FROM items; -- MySQL: CHAR_LENGTH も可
+- 日付抽出: SELECT DATE(created_at) AS d, COUNT(*) FROM orders GROUP BY DATE(created_at);
+
+8. テーブル定義 最短サンプル (実行例)
+CREATE TABLE items (
+  id SERIAL PRIMARY KEY,        -- MySQL: INT AUTO_INCREMENT
+  name VARCHAR(100) NOT NULL,
+  price INTEGER DEFAULT 0,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+-- 列追加: ALTER TABLE items ADD COLUMN note TEXT;
+-- 削除: DROP TABLE items;
+
+9. 制約とインデックスの最少セット (例)
+- 制約付きテーブル: CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    active BOOLEAN DEFAULT true,
+    CONSTRAINT uniq_user_name UNIQUE (name)
+  );
+- 外部キー: CREATE TABLE orders (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    total INTEGER NOT NULL
+  );
+- インデックス追加: CREATE INDEX idx_items_price ON items(price);
+- インデックス削除: DROP INDEX idx_items_price; -- MySQL: DROP INDEX idx_items_price ON items;
+
+10. トランザクション 3 コマンド (例)
+BEGIN; -- または START TRANSACTION;
+  UPDATE items SET price = price - 50 WHERE id = 1;
+  INSERT INTO orders (user_id, total) VALUES (1, 900);
+COMMIT; -- 失敗時は ROLLBACK;
+
+11. 権限 (DB により差異あり・例)
+- 付与: GRANT SELECT, INSERT ON items TO app_user;
+- 取消: REVOKE INSERT ON items FROM app_user;
+
+12. CSV ロード例 (実行コマンド)
+- PostgreSQL: \copy items FROM 'file.csv' CSV HEADER;
+- MySQL: LOAD DATA INFILE 'file.csv' INTO TABLE items FIELDS TERMINATED BY ',' ENCLOSED BY '"' IGNORE 1 LINES;
+
+最後にチェック (事故防止 5 点)
+- UPDATE/DELETE に WHERE を付けたか
+- COMMIT/ROLLBACK を忘れていないか
+- NULL 比較で = を使っていないか (IS NULL を使う)
+- LIKE の %/_ を入れたか
+- ORDER BY と LIMIT で意図通りの順序・件数か

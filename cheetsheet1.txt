@@ -1,0 +1,95 @@
+SQL コマンド チートシート (SQLite/MySQL/PostgreSQL 共通の書き方中心)
+==============================================================
+
+基本構文
+- SELECT: SELECT {列1, 列2} FROM テーブル [WHERE 条件] [GROUP BY 列] [HAVING 条件] [ORDER BY 列 ASC|DESC] [LIMIT n OFFSET m];
+- 別名: SELECT 列 AS 名, テーブル AS 別名 FROM テーブル AS 別名;
+- NULL 判定: IS NULL / IS NOT NULL, COALESCE(列, 置換値)
+- コメント: -- 行末まで / /* 複数行 */
+
+CRUD 基本
+- INSERT: INSERT INTO テーブル (列1, 列2) VALUES (値1, 値2);
+- 複数行 INSERT: INSERT INTO テーブル (a,b) VALUES (1,2), (3,4);
+- UPDATE: UPDATE テーブル SET 列1 = 値1, 列2 = 値2 WHERE 条件;
+- DELETE: DELETE FROM テーブル WHERE 条件; -- WHERE 無しは全件削除
+
+検索のよく使う句
+- 比較: =, <>, >, <, >=, <=
+- 部分一致: LIKE 'abc%' / NOT LIKE; ワイルドカード % (任意長), _ (1 文字)
+- IN/NOT IN: WHERE 列 IN (v1, v2)
+- BETWEEN: WHERE 列 BETWEEN 下限 AND 上限
+- 論理: AND / OR / NOT
+- 並び替え: ORDER BY 列 ASC|DESC, 複数列はカンマ区切り
+- 上位 n 件: LIMIT n [OFFSET m] (MySQL/PostgreSQL/SQLite), TOP n (SQL Server)
+
+集計
+- 集計関数: COUNT(*), SUM(列), AVG(列), MIN(列), MAX(列)
+- GROUP BY: SELECT 列, 集計関数 FROM テーブル GROUP BY 列;
+- HAVING: GROUP BY 後の条件: HAVING 集計関数 比較値
+
+JOIN
+- 内部結合: SELECT ... FROM A INNER JOIN B ON A.id = B.a_id;
+- 外部結合: LEFT/RIGHT OUTER JOIN
+- 交差結合: CROSS JOIN (全組み合わせ)
+- USING: SELECT ... FROM A JOIN B USING (共通列);
+- NATURAL JOIN: 共通列で自動結合 (明示の ON 推奨)
+
+サブクエリ・集合
+- サブクエリ: WHERE 列 IN (SELECT ...)
+- 相関サブクエリ: サブクエリ内で外側の列を参照
+- EXISTS: WHERE EXISTS (SELECT 1 FROM ... WHERE 条件)
+- UNION: UNION (重複除去) / UNION ALL (重複保持)
+
+文字列・日付の例 (DB により関数名が異なることあり)
+- 連結: CONCAT(a, b) または a || b
+- 部分文字列: SUBSTRING(col FROM 1 FOR 3) / SUBSTR(col, 1, 3)
+- 長さ: LENGTH(col) (MySQL は CHAR_LENGTH/CHARACTER_LENGTH)
+- 日付: CURRENT_DATE, CURRENT_TIMESTAMP, DATE(col)
+
+データ定義 (DDL)
+- 作成: CREATE TABLE テーブル (
+		id SERIAL PRIMARY KEY,    -- MySQL: INT AUTO_INCREMENT
+		col1 VARCHAR(100) NOT NULL,
+		col2 INTEGER DEFAULT 0,
+		created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+	);
+- 変更: ALTER TABLE テーブル ADD COLUMN 新列 型 [DEFAULT];
+				ALTER TABLE テーブル DROP COLUMN 列; -- DB により制限あり
+- 削除: DROP TABLE テーブル;
+
+制約
+- PRIMARY KEY: 一意 + NOT NULL
+- UNIQUE: 一意性
+- NOT NULL: NULL 禁止
+- CHECK: 値の条件制約
+- FOREIGN KEY: 外部キー; ON DELETE/UPDATE {CASCADE | SET NULL | RESTRICT}
+
+インデックス
+- 作成: CREATE INDEX idx_name ON テーブル(列);
+- 削除: DROP INDEX idx_name; (MySQL: DROP INDEX idx ON テーブル)
+- ユニーク: CREATE UNIQUE INDEX ...
+
+トランザクション
+- 開始: BEGIN; or START TRANSACTION;
+- 確定: COMMIT;
+- 取り消し: ROLLBACK;
+- 分離レベル (例): SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
+
+ビュー
+- 作成: CREATE VIEW ビュー名 AS SELECT ...;
+- 削除: DROP VIEW ビュー名;
+
+権限 (DB ごとに文法差異あり)
+- 付与: GRANT 権限 ON オブジェクト TO ユーザー; -- 例: GRANT SELECT, INSERT ON table TO alice;
+- 取り消し: REVOKE 権限 ON オブジェクト FROM ユーザー;
+
+データロード例
+- CSV 取り込み (PostgreSQL): \copy テーブル FROM 'file.csv' CSV HEADER;
+- MySQL: LOAD DATA INFILE 'file.csv' INTO TABLE テーブル FIELDS TERMINATED BY ',' ENCLOSED BY '"' IGNORE 1 LINES;
+
+トラブル時の確認ポイント
+- WHERE 句を付け忘れていないか (特に UPDATE/DELETE)
+- トランザクションを閉じたか (COMMIT/ROLLBACK)
+- LIKE のワイルドカード漏れ (%/_)
+- NULL 比較に = を使っていないか (IS NULL を使用)
+- LIMIT や ORDER BY で期待通りの件数・順序か

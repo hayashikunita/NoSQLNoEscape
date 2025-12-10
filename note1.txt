@@ -1,0 +1,48 @@
+SQL 学習で大事なポイントメモ
+==========================
+
+学びの進め方
+- 手を動かす: SELECT/INSERT/UPDATE/DELETE を小さなテーブルで即実行し、結果を確認する。
+- 実行計画を見る: EXPLAIN (ANALYZE) でプランと実行時間をセットで確認する習慣を付ける。
+- 1 日 1 例題: JOIN + GROUP BY + WHERE を含むクエリを毎日 1 本は書く。
+
+設計とデータ型の基本
+- 主キー: INT/BIGINT の連番で OK (UUID が必要なら理由を明確に)。
+- 文字列: 長さを決める (VARCHAR/ TEXT)。
+- 日付: タイムゾーンを意識。アプリ層 UTC 保管 + ローカル表示が安全。
+- 数値: 金額は DECIMAL、フラグは BOOLEAN、小数は FLOAT/DOUBLE だが誤差に注意。
+
+NULL と比較の注意
+- NULL は = で比較しない: IS NULL / IS NOT NULL を使う。
+- COALESCE で代替値を入れる、NOT NULL 制約で防ぐ、必要なら DEFAULT を付ける。
+
+JOIN と集計の落とし穴
+- 外部結合で COUNT(*) は行が増えることがある。COUNT(対象列) と GROUP BY を意識。
+- 重複を減らすなら DISTINCT、ただしコスト増を理解して使う。
+- GROUP BY の後フィルタは HAVING、前は WHERE。
+
+インデックス指針
+- よく使う WHERE 列、JOIN キー、ORDER BY/ GROUP BY 列に張る。
+- カーディナリティの高い列が効果的。低すぎる列（例: 真偽値）はあまり効かない。
+- 複合インデックスは「左端一致」。(a,b) なら a で始まる条件が効く。
+- 不要なら DROP INDEX。INSERT/UPDATE/DELETE のコストも増えることを意識。
+
+トランザクションとロック
+- BEGIN → 複数操作 → COMMIT/ROLLBACK。忘れるとロック長期化。
+- 隔離レベルを知る: READ COMMITTED / REPEATABLE READ / SERIALIZABLE。
+- 悲観ロック/楽観ロックの違いと使い分けを理解する。
+
+パフォーマンスを見る視点
+- EXPLAIN で Seq Scan / Index Scan / Nested Loop / Hash Join を確認。
+- 不要な SELECT * を避け、必要な列だけ投げる。
+- LIMIT だけでページングせず、ORDER BY を必ず付けて決定論的に。
+
+運用の基本チェック
+- UPDATE/DELETE は WHERE を必ず確認。必要ならまず SELECT で対象を確認。
+- バックアップとリストア手順を 1 回は練習。
+- マイグレーションツール（例: Flyway, Liquibase）を使い、手作業 DDL を避ける。
+
+学習用の小課題サンプル
+- 「1 ユーザーあたりの注文総額トップ 5」を書く: JOIN + GROUP BY + ORDER BY + LIMIT。
+- 「直近 7 日の新規ユーザーと注文数」を書く: 日付関数 + WHERE + GROUP BY。
+- 「未注文ユーザー一覧」を書く: LEFT JOIN + WHERE ... IS NULL。

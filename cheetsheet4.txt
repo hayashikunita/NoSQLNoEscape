@@ -1,0 +1,78 @@
+SQL コマンド チートシート (超シンプル速習版)
+==========================================
+
+まずはこれだけ (SELECT 基本)
+- SELECT 列 FROM テーブル;
+- 条件: WHERE 条件 例) WHERE id = 10 AND status = 'open'
+- 並び替え: ORDER BY 列 ASC|DESC
+- 上位 n 件: LIMIT n [OFFSET m] (MySQL/PG/SQLite), TOP n (SQL Server)
+- 別名: SELECT 列 AS 別名, テーブル AS t FROM テーブル AS t;
+
+よくある CRUD
+- INSERT 1 行: INSERT INTO テーブル (a, b) VALUES (1, 'x');
+- INSERT 複数: INSERT INTO テーブル (a, b) VALUES (1,'x'), (2,'y');
+- UPDATE: UPDATE テーブル SET a = 2, b = 'y' WHERE id = 1;
+- DELETE: DELETE FROM テーブル WHERE id = 1; -- WHERE 無しは全件削除
+
+検索テク (WHERE で使う)
+- 比較: =, <>, >, <, >=, <=
+- 部分一致: LIKE 'A%'; -- % 任意長, _ 1 文字
+- 集合: IN (値1, 値2)
+- 範囲: BETWEEN 下限 AND 上限
+- 論理: AND / OR / NOT
+
+集計の最短パターン
+- COUNT/SUM/AVG/MIN/MAX: SELECT COUNT(*) FROM t;
+- GROUP BY: SELECT dept, COUNT(*) FROM emp GROUP BY dept;
+- HAVING: SELECT dept, COUNT(*) c FROM emp GROUP BY dept HAVING c >= 3;
+
+JOIN の最小セット
+- 内部結合: SELECT ... FROM A INNER JOIN B ON A.id = B.a_id;
+- 左外部: SELECT ... FROM A LEFT JOIN B ON A.id = B.a_id; -- A を残す
+- USING 句: SELECT ... FROM A JOIN B USING (共通列);
+
+サブクエリ/集合
+- サブクエリ IN: WHERE user_id IN (SELECT id FROM users WHERE active)
+- EXISTS: WHERE EXISTS (SELECT 1 FROM orders o WHERE o.user_id = u.id)
+- UNION: クエリ1 UNION [ALL] クエリ2; -- ALL は重複保持
+
+文字列と日付 (差分少ない共通形)
+- 連結: CONCAT(a, b) または a || b
+- 部分: SUBSTR(col, 1, 3) / SUBSTRING(col FROM 1 FOR 3)
+- 長さ: LENGTH(col) (MySQL は CHAR_LENGTH も)
+- 日付: CURRENT_DATE, CURRENT_TIMESTAMP, DATE(col)
+
+DDL の最短例 (テーブル定義)
+- 作成: CREATE TABLE items (
+		id SERIAL PRIMARY KEY,        -- MySQL: INT AUTO_INCREMENT
+		name VARCHAR(100) NOT NULL,
+		price INTEGER DEFAULT 0,
+		created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+	);
+- 変更: ALTER TABLE items ADD COLUMN note TEXT;
+- 削除: DROP TABLE items;
+
+制約とインデックス
+- 制約: PRIMARY KEY, UNIQUE, NOT NULL, CHECK, FOREIGN KEY (... ON DELETE/UPDATE CASCADE|SET NULL|RESTRICT)
+- インデックス追加: CREATE INDEX idx_items_price ON items(price);
+- インデックス削除: DROP INDEX idx_items_price; (MySQL: DROP INDEX idx ON items)
+
+トランザクション 3 つだけ
+- BEGIN; / START TRANSACTION;
+- COMMIT;  -- 確定
+- ROLLBACK; -- 取り消し
+
+権限 (差異あり)
+- 付与: GRANT SELECT, INSERT ON table TO user;
+- 取り消し: REVOKE SELECT, INSERT ON table FROM user;
+
+CSV ロード例
+- PostgreSQL: \copy items FROM 'file.csv' CSV HEADER;
+- MySQL: LOAD DATA INFILE 'file.csv' INTO TABLE items FIELDS TERMINATED BY ',' ENCLOSED BY '"' IGNORE 1 LINES;
+
+落とし穴チェック
+- UPDATE/DELETE に WHERE を付けたか
+- COMMIT/ROLLBACK を忘れていないか
+- NULL 比較で = を使っていないか (IS NULL を使う)
+- LIKE の %/_ を入れたか
+- ORDER BY と LIMIT で意図通りの順序・件数か

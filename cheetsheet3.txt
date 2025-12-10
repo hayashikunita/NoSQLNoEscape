@@ -1,0 +1,94 @@
+SQL コマンド チートシート (見やすい速習版)
+=======================================
+
+よく使う基本形
+- SELECT: SELECT 列1, 列2 FROM テーブル [WHERE 条件] [GROUP BY 列] [HAVING 条件] [ORDER BY 列 ASC|DESC] [LIMIT n OFFSET m];
+- 別名: SELECT 列 AS 別名, テーブル AS t FROM テーブル AS t;
+- NULL 判定/置換: IS NULL / IS NOT NULL; COALESCE(列, 置換値)
+- コメント: -- 行末まで / /* 複数行 */
+
+CRUD
+- INSERT 1行: INSERT INTO テーブル (a, b) VALUES (1, 'x');
+- INSERT 複数: INSERT INTO テーブル (a, b) VALUES (1,'x'), (2,'y');
+- UPDATE: UPDATE テーブル SET a = 2, b = 'y' WHERE id = 1;
+- DELETE: DELETE FROM テーブル WHERE id = 1; -- WHERE 無しは全削除
+
+検索のキモ
+- 比較: =, <>, >, <, >=, <=
+- 部分一致: WHERE name LIKE 'A%'; -- % 任意長, _ 1文字
+- 集合: WHERE status IN ('new','done');
+- 範囲: WHERE score BETWEEN 50 AND 80;
+- 論理: AND / OR / NOT
+- 並び替え: ORDER BY created_at DESC, id ASC;
+- 上位件数: LIMIT 10 OFFSET 20 (MySQL/PG/SQLite) / TOP 10 (SQL Server)
+
+集計
+- 関数: COUNT(*), SUM(col), AVG(col), MIN(col), MAX(col)
+- GROUP BY: SELECT dept, COUNT(*) FROM emp GROUP BY dept;
+- HAVING: SELECT dept, COUNT(*) c FROM emp GROUP BY dept HAVING c >= 3;
+
+JOIN の型
+- 内部: SELECT ... FROM A INNER JOIN B ON A.id = B.a_id;
+- 左外: SELECT ... FROM A LEFT JOIN B ON A.id = B.a_id; -- A を全件残す
+- 右外: RIGHT JOIN (DB により可否)
+- 全外: FULL OUTER JOIN (MySQL 非対応)
+- USING 句: SELECT ... FROM A JOIN B USING (共通列);
+
+サブクエリ/集合演算
+- サブクエリ: WHERE id IN (SELECT user_id FROM orders WHERE total > 1000);
+- EXISTS: WHERE EXISTS (SELECT 1 FROM orders o WHERE o.user_id = u.id);
+- UNION: クエリ1 UNION [ALL] クエリ2; -- ALL は重複保持
+
+文字列/日付 (DB で微差あり)
+- 連結: CONCAT(a, b) または a || b
+- 部分: SUBSTR(col, 1, 3) / SUBSTRING(col FROM 1 FOR 3)
+- 長さ: LENGTH(col) (MySQL は CHAR_LENGTH も)
+- 日付: CURRENT_DATE, CURRENT_TIMESTAMP, DATE(col)
+
+DDL (テーブル定義)
+- 作成: CREATE TABLE items (
+    id SERIAL PRIMARY KEY,        -- MySQL: INT AUTO_INCREMENT
+    name VARCHAR(100) NOT NULL,
+    price INTEGER DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  );
+- 変更: ALTER TABLE items ADD COLUMN note TEXT;
+        ALTER TABLE items DROP COLUMN note; -- DB により制限
+- 削除: DROP TABLE items;
+
+制約
+- PRIMARY KEY: 一意 + NOT NULL
+- UNIQUE: 重複禁止
+- NOT NULL: NULL 禁止
+- CHECK: 値の条件制約
+- FOREIGN KEY: 参照制約; ON DELETE/UPDATE CASCADE|SET NULL|RESTRICT
+
+インデックス
+- 追加: CREATE INDEX idx_items_price ON items(price);
+- 削除: DROP INDEX idx_items_price; (MySQL: DROP INDEX idx ON items)
+- 一意: CREATE UNIQUE INDEX ...
+
+トランザクション
+- BEGIN;  -- または START TRANSACTION;
+- COMMIT; -- 確定
+- ROLLBACK; -- 取り消し
+- 分離レベル例: SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
+
+ビュー
+- 作成: CREATE VIEW recent_orders AS SELECT * FROM orders WHERE created_at >= CURRENT_DATE - INTERVAL '7 days';
+- 削除: DROP VIEW recent_orders;
+
+権限 (文法は DB 差異あり)
+- 付与: GRANT SELECT, INSERT ON table_name TO user_name;
+- 取り消し: REVOKE SELECT, INSERT ON table_name FROM user_name;
+
+CSV ロード例
+- PostgreSQL: \copy items FROM 'file.csv' CSV HEADER;
+- MySQL: LOAD DATA INFILE 'file.csv' INTO TABLE items FIELDS TERMINATED BY ',' ENCLOSED BY '"' IGNORE 1 LINES;
+
+落とし穴チェックリスト
+- UPDATE/DELETE に WHERE を付けたか
+- トランザクションを閉じたか (COMMIT/ROLLBACK)
+- NULL 比較で = を使っていないか (IS NULL を使用)
+- LIKE のワイルドカード %/_ を入れたか
+- ORDER BY と LIMIT で意図した順序・件数か
