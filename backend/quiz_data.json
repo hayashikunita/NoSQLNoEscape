@@ -1,0 +1,2602 @@
+[
+  {
+    "id": "basic-001",
+    "level": "basic",
+    "question": "[基礎] 全件取得のSQLはどれ？",
+    "options": [
+      "GET * FROM employees;",
+      "SELECT * FROM employees;",
+      "READ ALL employees;",
+      "FETCH employees;"
+    ],
+    "answerIndex": 1,
+    "explanation": "全件取得は SELECT * FROM <table>."
+  },
+  {
+    "id": "basic-002",
+    "level": "basic",
+    "question": "[基礎] id=10 を取得する正しいSQLはどれ？",
+    "options": [
+      "SELECT * FROM employees WHERE id = 10;",
+      "SELECT * employees id 10;",
+      "GET employees WHERE id 10;",
+      "READ employees id=10;"
+    ],
+    "answerIndex": 0,
+    "explanation": "条件は WHERE 句で書く。"
+  },
+  {
+    "id": "basic-003",
+    "level": "basic",
+    "question": "[基礎] 価格を高い順に並べる ORDER BY はどれ？",
+    "options": [
+      "ORDER BY price ASC",
+      "ORDER BY price DESC",
+      "GROUP BY price DESC",
+      "SORT price HIGH"
+    ],
+    "answerIndex": 1,
+    "explanation": "DESC は降順、ASC は昇順。"
+  },
+  {
+    "id": "basic-004",
+    "level": "basic",
+    "question": "[基礎] 重複行を除いて列を取得するキーワードは？",
+    "options": [
+      "ONLY",
+      "DISTINCT",
+      "UNIQUE ROWS",
+      "ONCE"
+    ],
+    "answerIndex": 1,
+    "explanation": "重複排除は DISTINCT。"
+  },
+  {
+    "id": "basic-005",
+    "level": "basic",
+    "question": "[基礎] 上位5件を返す一般的な書き方は？",
+    "options": [
+      "SELECT * FROM items LIMIT 5;",
+      "SELECT TOP 5 FROM items;",
+      "SELECT FIRST 5 items;",
+      "SELECT * ITEMS(5);"
+    ],
+    "answerIndex": 0,
+    "explanation": "MySQL/PG/SQLite では LIMIT, SQL Server は TOP。"
+  },
+  {
+    "id": "basic-006",
+    "level": "basic",
+    "question": "[基礎] name が 'A' で始まる行を探す LIKE はどれ？",
+    "options": [
+      "LIKE '%A'",
+      "LIKE 'A%'",
+      "LIKE '%A%'",
+      "LIKE '_A'"
+    ],
+    "answerIndex": 1,
+    "explanation": "前方一致は 'A%'."
+  },
+  {
+    "id": "basic-007",
+    "level": "basic",
+    "question": "[基礎] 'abc' を含む行を探す LIKE はどれ？",
+    "options": [
+      "LIKE '%abc%'",
+      "LIKE 'abc%'",
+      "LIKE '%abc'",
+      "LIKE '__abc'"
+    ],
+    "answerIndex": 0,
+    "explanation": "包含検索は %abc% 。"
+  },
+  {
+    "id": "basic-008",
+    "level": "basic",
+    "question": "[基礎] 100〜500 を含む範囲検索は？",
+    "options": [
+      "WHERE price BETWEEN 100 AND 500",
+      "WHERE price IN 100 TO 500",
+      "WHERE price FROM 100 TO 500",
+      "WHERE price RANGE 100 500"
+    ],
+    "answerIndex": 0,
+    "explanation": "BETWEEN は両端を含む。"
+  },
+  {
+    "id": "basic-009",
+    "level": "basic",
+    "question": "[基礎] 状態が new または done の行を取る条件は？",
+    "options": [
+      "WHERE status IN ('new','done')",
+      "WHERE status = ('new','done')",
+      "WHERE status HAS ('new','done')",
+      "WHERE status ANY ('new','done')"
+    ],
+    "answerIndex": 0,
+    "explanation": "複数値は IN (...) が簡潔。"
+  },
+  {
+    "id": "basic-010",
+    "level": "basic",
+    "question": "[基礎] NULL 判定に使うのはどれ？",
+    "options": [
+      "= NULL",
+      "IS NULL",
+      "== NULL",
+      "EQUAL NULL"
+    ],
+    "answerIndex": 1,
+    "explanation": "NULL 比較は IS NULL / IS NOT NULL。"
+  },
+  {
+    "id": "basic-011",
+    "level": "basic",
+    "question": "[基礎] 行数を数える集計はどれ？",
+    "options": [
+      "SUM(*)",
+      "COUNT(*)",
+      "SIZE(*)",
+      "TOTAL(*)"
+    ],
+    "answerIndex": 1,
+    "explanation": "行数は COUNT(*)."
+  },
+  {
+    "id": "basic-012",
+    "level": "basic",
+    "question": "[基礎] 部署ごとに人数を出す句の組み合わせは？",
+    "options": [
+      "GROUP BY dept",
+      "ORDER BY dept",
+      "PARTITION dept",
+      "SPLIT BY dept"
+    ],
+    "answerIndex": 0,
+    "explanation": "集計の軸は GROUP BY で指定。"
+  },
+  {
+    "id": "basic-013",
+    "level": "basic",
+    "question": "[基礎] 集計後に件数2以上に絞る句は？",
+    "options": [
+      "WHERE COUNT(*) >= 2",
+      "HAVING COUNT(*) >= 2",
+      "FILTER COUNT>=2",
+      "AFTER COUNT>=2"
+    ],
+    "answerIndex": 1,
+    "explanation": "集計後の条件は HAVING。"
+  },
+  {
+    "id": "basic-014",
+    "level": "basic",
+    "question": "[基礎] INNER JOIN の基本形はどれ？",
+    "options": [
+      "SELECT * FROM A JOIN B ON A.id = B.a_id;",
+      "SELECT * FROM A, B;",
+      "SELECT * FROM A UNION B;",
+      "SELECT * FROM A ADD B;"
+    ],
+    "answerIndex": 0,
+    "explanation": "結合条件は ON で書く。"
+  },
+  {
+    "id": "basic-015",
+    "level": "basic",
+    "question": "[基礎] LEFT JOIN の説明として正しいものは？",
+    "options": [
+      "左表を残し右が無ければ NULL を入れる",
+      "右表だけ残す",
+      "両方に無い行も作る",
+      "常に全組み合わせを返す"
+    ],
+    "answerIndex": 0,
+    "explanation": "LEFT は左優先で欠損は NULL。"
+  },
+  {
+    "id": "basic-016",
+    "level": "basic",
+    "question": "[基礎] UPDATE の正しい例はどれ？",
+    "options": [
+      "UPDATE items SET price = 500 WHERE id = 1;",
+      "UPDATE items price 500 id 1;",
+      "SET price=500 FROM items WHERE id=1;",
+      "CHANGE items SET price=500 id=1;"
+    ],
+    "answerIndex": 0,
+    "explanation": "UPDATE ... SET ... WHERE ... が基本。"
+  },
+  {
+    "id": "basic-017",
+    "level": "basic",
+    "question": "[基礎] DELETE で全削除を避ける基本は？",
+    "options": [
+      "WHERE を付ける",
+      "ORDER BY を付ける",
+      "GROUP BY を付ける",
+      "LIMIT を付けない"
+    ],
+    "answerIndex": 0,
+    "explanation": "DELETE は WHERE なしで全削除になる。"
+  },
+  {
+    "id": "basic-018",
+    "level": "basic",
+    "question": "[基礎] 複数行 INSERT の書き方はどれ？",
+    "options": [
+      "INSERT INTO items (a,b) VALUES (1,'x'), (2,'y');",
+      "INSERT items (1,'x')(2,'y');",
+      "INSERT ALL items VALUES (1,'x')(2,'y');",
+      "ADD items VALUES (1,'x'), (2,'y');"
+    ],
+    "answerIndex": 0,
+    "explanation": "VALUES (...) をカンマ区切りで並べる。"
+  },
+  {
+    "id": "basic-019",
+    "level": "basic",
+    "question": "[基礎] シンプルなテーブル作成の書き方はどれ？",
+    "options": [
+      "CREATE TABLE items (id INT PRIMARY KEY, name TEXT);",
+      "MAKE TABLE items id int, name text;",
+      "NEW TABLE items WITH id,name;",
+      "TABLE items CREATE();"
+    ],
+    "answerIndex": 0,
+    "explanation": "CREATE TABLE <name> (<col defs>) が基本。"
+  },
+  {
+    "id": "basic-020",
+    "level": "basic",
+    "question": "[基礎] 主キーの性質として正しいものは？",
+    "options": [
+      "一意かつ NOT NULL",
+      "NULL を許す",
+      "重複してよい",
+      "文字列のみ可能"
+    ],
+    "answerIndex": 0,
+    "explanation": "PRIMARY KEY は一意 & NOT NULL。"
+  },
+  {
+    "id": "basic-021",
+    "level": "basic",
+    "question": "[基礎] インデックスを張る基本的な理由は？",
+    "options": [
+      "検索を速くする",
+      "ストレージを減らす",
+      "行を暗号化する",
+      "順序をランダムにする"
+    ],
+    "answerIndex": 0,
+    "explanation": "索引は検索・並び替えを高速化する。"
+  },
+  {
+    "id": "basic-022",
+    "level": "basic",
+    "question": "[基礎] 全件取得のSQLはどれ？",
+    "options": [
+      "GET * FROM employees;",
+      "SELECT * FROM employees;",
+      "READ ALL employees;",
+      "FETCH employees;"
+    ],
+    "answerIndex": 1,
+    "explanation": "全件取得は SELECT * FROM <table>."
+  },
+  {
+    "id": "basic-023",
+    "level": "basic",
+    "question": "[基礎] id=10 を取得する正しいSQLはどれ？",
+    "options": [
+      "SELECT * FROM employees WHERE id = 10;",
+      "SELECT * employees id 10;",
+      "GET employees WHERE id 10;",
+      "READ employees id=10;"
+    ],
+    "answerIndex": 0,
+    "explanation": "条件は WHERE 句で書く。"
+  },
+  {
+    "id": "basic-024",
+    "level": "basic",
+    "question": "[基礎] 価格を高い順に並べる ORDER BY はどれ？",
+    "options": [
+      "ORDER BY price ASC",
+      "ORDER BY price DESC",
+      "GROUP BY price DESC",
+      "SORT price HIGH"
+    ],
+    "answerIndex": 1,
+    "explanation": "DESC は降順、ASC は昇順。"
+  },
+  {
+    "id": "basic-025",
+    "level": "basic",
+    "question": "[基礎] 重複行を除いて列を取得するキーワードは？",
+    "options": [
+      "ONLY",
+      "DISTINCT",
+      "UNIQUE ROWS",
+      "ONCE"
+    ],
+    "answerIndex": 1,
+    "explanation": "重複排除は DISTINCT。"
+  },
+  {
+    "id": "basic-026",
+    "level": "basic",
+    "question": "[基礎] 上位5件を返す一般的な書き方は？",
+    "options": [
+      "SELECT * FROM items LIMIT 5;",
+      "SELECT TOP 5 FROM items;",
+      "SELECT FIRST 5 items;",
+      "SELECT * ITEMS(5);"
+    ],
+    "answerIndex": 0,
+    "explanation": "MySQL/PG/SQLite では LIMIT, SQL Server は TOP。"
+  },
+  {
+    "id": "basic-027",
+    "level": "basic",
+    "question": "[基礎] name が 'A' で始まる行を探す LIKE はどれ？",
+    "options": [
+      "LIKE '%A'",
+      "LIKE 'A%'",
+      "LIKE '%A%'",
+      "LIKE '_A'"
+    ],
+    "answerIndex": 1,
+    "explanation": "前方一致は 'A%'."
+  },
+  {
+    "id": "basic-028",
+    "level": "basic",
+    "question": "[基礎] 'abc' を含む行を探す LIKE はどれ？",
+    "options": [
+      "LIKE '%abc%'",
+      "LIKE 'abc%'",
+      "LIKE '%abc'",
+      "LIKE '__abc'"
+    ],
+    "answerIndex": 0,
+    "explanation": "包含検索は %abc% 。"
+  },
+  {
+    "id": "basic-029",
+    "level": "basic",
+    "question": "[基礎] 100〜500 を含む範囲検索は？",
+    "options": [
+      "WHERE price BETWEEN 100 AND 500",
+      "WHERE price IN 100 TO 500",
+      "WHERE price FROM 100 TO 500",
+      "WHERE price RANGE 100 500"
+    ],
+    "answerIndex": 0,
+    "explanation": "BETWEEN は両端を含む。"
+  },
+  {
+    "id": "basic-030",
+    "level": "basic",
+    "question": "[基礎] 状態が new または done の行を取る条件は？",
+    "options": [
+      "WHERE status IN ('new','done')",
+      "WHERE status = ('new','done')",
+      "WHERE status HAS ('new','done')",
+      "WHERE status ANY ('new','done')"
+    ],
+    "answerIndex": 0,
+    "explanation": "複数値は IN (...) が簡潔。"
+  },
+  {
+    "id": "basic-031",
+    "level": "basic",
+    "question": "[基礎] NULL 判定に使うのはどれ？",
+    "options": [
+      "= NULL",
+      "IS NULL",
+      "== NULL",
+      "EQUAL NULL"
+    ],
+    "answerIndex": 1,
+    "explanation": "NULL 比較は IS NULL / IS NOT NULL。"
+  },
+  {
+    "id": "basic-032",
+    "level": "basic",
+    "question": "[基礎] 行数を数える集計はどれ？",
+    "options": [
+      "SUM(*)",
+      "COUNT(*)",
+      "SIZE(*)",
+      "TOTAL(*)"
+    ],
+    "answerIndex": 1,
+    "explanation": "行数は COUNT(*)."
+  },
+  {
+    "id": "basic-033",
+    "level": "basic",
+    "question": "[基礎] 部署ごとに人数を出す句の組み合わせは？",
+    "options": [
+      "GROUP BY dept",
+      "ORDER BY dept",
+      "PARTITION dept",
+      "SPLIT BY dept"
+    ],
+    "answerIndex": 0,
+    "explanation": "集計の軸は GROUP BY で指定。"
+  },
+  {
+    "id": "basic-034",
+    "level": "basic",
+    "question": "[基礎] 集計後に件数2以上に絞る句は？",
+    "options": [
+      "WHERE COUNT(*) >= 2",
+      "HAVING COUNT(*) >= 2",
+      "FILTER COUNT>=2",
+      "AFTER COUNT>=2"
+    ],
+    "answerIndex": 1,
+    "explanation": "集計後の条件は HAVING。"
+  },
+  {
+    "id": "basic-035",
+    "level": "basic",
+    "question": "[基礎] INNER JOIN の基本形はどれ？",
+    "options": [
+      "SELECT * FROM A JOIN B ON A.id = B.a_id;",
+      "SELECT * FROM A, B;",
+      "SELECT * FROM A UNION B;",
+      "SELECT * FROM A ADD B;"
+    ],
+    "answerIndex": 0,
+    "explanation": "結合条件は ON で書く。"
+  },
+  {
+    "id": "basic-036",
+    "level": "basic",
+    "question": "[基礎] LEFT JOIN の説明として正しいものは？",
+    "options": [
+      "左表を残し右が無ければ NULL を入れる",
+      "右表だけ残す",
+      "両方に無い行も作る",
+      "常に全組み合わせを返す"
+    ],
+    "answerIndex": 0,
+    "explanation": "LEFT は左優先で欠損は NULL。"
+  },
+  {
+    "id": "basic-037",
+    "level": "basic",
+    "question": "[基礎] UPDATE の正しい例はどれ？",
+    "options": [
+      "UPDATE items SET price = 500 WHERE id = 1;",
+      "UPDATE items price 500 id 1;",
+      "SET price=500 FROM items WHERE id=1;",
+      "CHANGE items SET price=500 id=1;"
+    ],
+    "answerIndex": 0,
+    "explanation": "UPDATE ... SET ... WHERE ... が基本。"
+  },
+  {
+    "id": "basic-038",
+    "level": "basic",
+    "question": "[基礎] DELETE で全削除を避ける基本は？",
+    "options": [
+      "WHERE を付ける",
+      "ORDER BY を付ける",
+      "GROUP BY を付ける",
+      "LIMIT を付けない"
+    ],
+    "answerIndex": 0,
+    "explanation": "DELETE は WHERE なしで全削除になる。"
+  },
+  {
+    "id": "basic-039",
+    "level": "basic",
+    "question": "[基礎] 複数行 INSERT の書き方はどれ？",
+    "options": [
+      "INSERT INTO items (a,b) VALUES (1,'x'), (2,'y');",
+      "INSERT items (1,'x')(2,'y');",
+      "INSERT ALL items VALUES (1,'x')(2,'y');",
+      "ADD items VALUES (1,'x'), (2,'y');"
+    ],
+    "answerIndex": 0,
+    "explanation": "VALUES (...) をカンマ区切りで並べる。"
+  },
+  {
+    "id": "basic-040",
+    "level": "basic",
+    "question": "[基礎] シンプルなテーブル作成の書き方はどれ？",
+    "options": [
+      "CREATE TABLE items (id INT PRIMARY KEY, name TEXT);",
+      "MAKE TABLE items id int, name text;",
+      "NEW TABLE items WITH id,name;",
+      "TABLE items CREATE();"
+    ],
+    "answerIndex": 0,
+    "explanation": "CREATE TABLE <name> (<col defs>) が基本。"
+  },
+  {
+    "id": "basic-041",
+    "level": "basic",
+    "question": "[基礎] 主キーの性質として正しいものは？",
+    "options": [
+      "一意かつ NOT NULL",
+      "NULL を許す",
+      "重複してよい",
+      "文字列のみ可能"
+    ],
+    "answerIndex": 0,
+    "explanation": "PRIMARY KEY は一意 & NOT NULL。"
+  },
+  {
+    "id": "basic-042",
+    "level": "basic",
+    "question": "[基礎] インデックスを張る基本的な理由は？",
+    "options": [
+      "検索を速くする",
+      "ストレージを減らす",
+      "行を暗号化する",
+      "順序をランダムにする"
+    ],
+    "answerIndex": 0,
+    "explanation": "索引は検索・並び替えを高速化する。"
+  },
+  {
+    "id": "basic-043",
+    "level": "basic",
+    "question": "[基礎] 全件取得のSQLはどれ？",
+    "options": [
+      "GET * FROM employees;",
+      "SELECT * FROM employees;",
+      "READ ALL employees;",
+      "FETCH employees;"
+    ],
+    "answerIndex": 1,
+    "explanation": "全件取得は SELECT * FROM <table>."
+  },
+  {
+    "id": "basic-044",
+    "level": "basic",
+    "question": "[基礎] id=10 を取得する正しいSQLはどれ？",
+    "options": [
+      "SELECT * FROM employees WHERE id = 10;",
+      "SELECT * employees id 10;",
+      "GET employees WHERE id 10;",
+      "READ employees id=10;"
+    ],
+    "answerIndex": 0,
+    "explanation": "条件は WHERE 句で書く。"
+  },
+  {
+    "id": "basic-045",
+    "level": "basic",
+    "question": "[基礎] 価格を高い順に並べる ORDER BY はどれ？",
+    "options": [
+      "ORDER BY price ASC",
+      "ORDER BY price DESC",
+      "GROUP BY price DESC",
+      "SORT price HIGH"
+    ],
+    "answerIndex": 1,
+    "explanation": "DESC は降順、ASC は昇順。"
+  },
+  {
+    "id": "basic-046",
+    "level": "basic",
+    "question": "[基礎] 重複行を除いて列を取得するキーワードは？",
+    "options": [
+      "ONLY",
+      "DISTINCT",
+      "UNIQUE ROWS",
+      "ONCE"
+    ],
+    "answerIndex": 1,
+    "explanation": "重複排除は DISTINCT。"
+  },
+  {
+    "id": "basic-047",
+    "level": "basic",
+    "question": "[基礎] 上位5件を返す一般的な書き方は？",
+    "options": [
+      "SELECT * FROM items LIMIT 5;",
+      "SELECT TOP 5 FROM items;",
+      "SELECT FIRST 5 items;",
+      "SELECT * ITEMS(5);"
+    ],
+    "answerIndex": 0,
+    "explanation": "MySQL/PG/SQLite では LIMIT, SQL Server は TOP。"
+  },
+  {
+    "id": "basic-048",
+    "level": "basic",
+    "question": "[基礎] name が 'A' で始まる行を探す LIKE はどれ？",
+    "options": [
+      "LIKE '%A'",
+      "LIKE 'A%'",
+      "LIKE '%A%'",
+      "LIKE '_A'"
+    ],
+    "answerIndex": 1,
+    "explanation": "前方一致は 'A%'."
+  },
+  {
+    "id": "basic-049",
+    "level": "basic",
+    "question": "[基礎] 'abc' を含む行を探す LIKE はどれ？",
+    "options": [
+      "LIKE '%abc%'",
+      "LIKE 'abc%'",
+      "LIKE '%abc'",
+      "LIKE '__abc'"
+    ],
+    "answerIndex": 0,
+    "explanation": "包含検索は %abc% 。"
+  },
+  {
+    "id": "basic-050",
+    "level": "basic",
+    "question": "[基礎] 100〜500 を含む範囲検索は？",
+    "options": [
+      "WHERE price BETWEEN 100 AND 500",
+      "WHERE price IN 100 TO 500",
+      "WHERE price FROM 100 TO 500",
+      "WHERE price RANGE 100 500"
+    ],
+    "answerIndex": 0,
+    "explanation": "BETWEEN は両端を含む。"
+  },
+  {
+    "id": "basic-051",
+    "level": "basic",
+    "question": "[基礎] 状態が new または done の行を取る条件は？",
+    "options": [
+      "WHERE status IN ('new','done')",
+      "WHERE status = ('new','done')",
+      "WHERE status HAS ('new','done')",
+      "WHERE status ANY ('new','done')"
+    ],
+    "answerIndex": 0,
+    "explanation": "複数値は IN (...) が簡潔。"
+  },
+  {
+    "id": "basic-052",
+    "level": "basic",
+    "question": "[基礎] NULL 判定に使うのはどれ？",
+    "options": [
+      "= NULL",
+      "IS NULL",
+      "== NULL",
+      "EQUAL NULL"
+    ],
+    "answerIndex": 1,
+    "explanation": "NULL 比較は IS NULL / IS NOT NULL。"
+  },
+  {
+    "id": "basic-053",
+    "level": "basic",
+    "question": "[基礎] 行数を数える集計はどれ？",
+    "options": [
+      "SUM(*)",
+      "COUNT(*)",
+      "SIZE(*)",
+      "TOTAL(*)"
+    ],
+    "answerIndex": 1,
+    "explanation": "行数は COUNT(*)."
+  },
+  {
+    "id": "basic-054",
+    "level": "basic",
+    "question": "[基礎] 部署ごとに人数を出す句の組み合わせは？",
+    "options": [
+      "GROUP BY dept",
+      "ORDER BY dept",
+      "PARTITION dept",
+      "SPLIT BY dept"
+    ],
+    "answerIndex": 0,
+    "explanation": "集計の軸は GROUP BY で指定。"
+  },
+  {
+    "id": "basic-055",
+    "level": "basic",
+    "question": "[基礎] 集計後に件数2以上に絞る句は？",
+    "options": [
+      "WHERE COUNT(*) >= 2",
+      "HAVING COUNT(*) >= 2",
+      "FILTER COUNT>=2",
+      "AFTER COUNT>=2"
+    ],
+    "answerIndex": 1,
+    "explanation": "集計後の条件は HAVING。"
+  },
+  {
+    "id": "basic-056",
+    "level": "basic",
+    "question": "[基礎] INNER JOIN の基本形はどれ？",
+    "options": [
+      "SELECT * FROM A JOIN B ON A.id = B.a_id;",
+      "SELECT * FROM A, B;",
+      "SELECT * FROM A UNION B;",
+      "SELECT * FROM A ADD B;"
+    ],
+    "answerIndex": 0,
+    "explanation": "結合条件は ON で書く。"
+  },
+  {
+    "id": "basic-057",
+    "level": "basic",
+    "question": "[基礎] LEFT JOIN の説明として正しいものは？",
+    "options": [
+      "左表を残し右が無ければ NULL を入れる",
+      "右表だけ残す",
+      "両方に無い行も作る",
+      "常に全組み合わせを返す"
+    ],
+    "answerIndex": 0,
+    "explanation": "LEFT は左優先で欠損は NULL。"
+  },
+  {
+    "id": "basic-058",
+    "level": "basic",
+    "question": "[基礎] UPDATE の正しい例はどれ？",
+    "options": [
+      "UPDATE items SET price = 500 WHERE id = 1;",
+      "UPDATE items price 500 id 1;",
+      "SET price=500 FROM items WHERE id=1;",
+      "CHANGE items SET price=500 id=1;"
+    ],
+    "answerIndex": 0,
+    "explanation": "UPDATE ... SET ... WHERE ... が基本。"
+  },
+  {
+    "id": "basic-059",
+    "level": "basic",
+    "question": "[基礎] DELETE で全削除を避ける基本は？",
+    "options": [
+      "WHERE を付ける",
+      "ORDER BY を付ける",
+      "GROUP BY を付ける",
+      "LIMIT を付けない"
+    ],
+    "answerIndex": 0,
+    "explanation": "DELETE は WHERE なしで全削除になる。"
+  },
+  {
+    "id": "basic-060",
+    "level": "basic",
+    "question": "[基礎] 複数行 INSERT の書き方はどれ？",
+    "options": [
+      "INSERT INTO items (a,b) VALUES (1,'x'), (2,'y');",
+      "INSERT items (1,'x')(2,'y');",
+      "INSERT ALL items VALUES (1,'x')(2,'y');",
+      "ADD items VALUES (1,'x'), (2,'y');"
+    ],
+    "answerIndex": 0,
+    "explanation": "VALUES (...) をカンマ区切りで並べる。"
+  },
+  {
+    "id": "basic-061",
+    "level": "basic",
+    "question": "[基礎] シンプルなテーブル作成の書き方はどれ？",
+    "options": [
+      "CREATE TABLE items (id INT PRIMARY KEY, name TEXT);",
+      "MAKE TABLE items id int, name text;",
+      "NEW TABLE items WITH id,name;",
+      "TABLE items CREATE();"
+    ],
+    "answerIndex": 0,
+    "explanation": "CREATE TABLE <name> (<col defs>) が基本。"
+  },
+  {
+    "id": "basic-062",
+    "level": "basic",
+    "question": "[基礎] 主キーの性質として正しいものは？",
+    "options": [
+      "一意かつ NOT NULL",
+      "NULL を許す",
+      "重複してよい",
+      "文字列のみ可能"
+    ],
+    "answerIndex": 0,
+    "explanation": "PRIMARY KEY は一意 & NOT NULL。"
+  },
+  {
+    "id": "basic-063",
+    "level": "basic",
+    "question": "[基礎] インデックスを張る基本的な理由は？",
+    "options": [
+      "検索を速くする",
+      "ストレージを減らす",
+      "行を暗号化する",
+      "順序をランダムにする"
+    ],
+    "answerIndex": 0,
+    "explanation": "索引は検索・並び替えを高速化する。"
+  },
+  {
+    "id": "basic-064",
+    "level": "basic",
+    "question": "[基礎] 全件取得のSQLはどれ？",
+    "options": [
+      "GET * FROM employees;",
+      "SELECT * FROM employees;",
+      "READ ALL employees;",
+      "FETCH employees;"
+    ],
+    "answerIndex": 1,
+    "explanation": "全件取得は SELECT * FROM <table>."
+  },
+  {
+    "id": "basic-065",
+    "level": "basic",
+    "question": "[基礎] id=10 を取得する正しいSQLはどれ？",
+    "options": [
+      "SELECT * FROM employees WHERE id = 10;",
+      "SELECT * employees id 10;",
+      "GET employees WHERE id 10;",
+      "READ employees id=10;"
+    ],
+    "answerIndex": 0,
+    "explanation": "条件は WHERE 句で書く。"
+  },
+  {
+    "id": "basic-066",
+    "level": "basic",
+    "question": "[基礎] 価格を高い順に並べる ORDER BY はどれ？",
+    "options": [
+      "ORDER BY price ASC",
+      "ORDER BY price DESC",
+      "GROUP BY price DESC",
+      "SORT price HIGH"
+    ],
+    "answerIndex": 1,
+    "explanation": "DESC は降順、ASC は昇順。"
+  },
+  {
+    "id": "basic-067",
+    "level": "basic",
+    "question": "[基礎] 重複行を除いて列を取得するキーワードは？",
+    "options": [
+      "ONLY",
+      "DISTINCT",
+      "UNIQUE ROWS",
+      "ONCE"
+    ],
+    "answerIndex": 1,
+    "explanation": "重複排除は DISTINCT。"
+  },
+  {
+    "id": "basic-068",
+    "level": "basic",
+    "question": "[基礎] 上位5件を返す一般的な書き方は？",
+    "options": [
+      "SELECT * FROM items LIMIT 5;",
+      "SELECT TOP 5 FROM items;",
+      "SELECT FIRST 5 items;",
+      "SELECT * ITEMS(5);"
+    ],
+    "answerIndex": 0,
+    "explanation": "MySQL/PG/SQLite では LIMIT, SQL Server は TOP。"
+  },
+  {
+    "id": "basic-069",
+    "level": "basic",
+    "question": "[基礎] name が 'A' で始まる行を探す LIKE はどれ？",
+    "options": [
+      "LIKE '%A'",
+      "LIKE 'A%'",
+      "LIKE '%A%'",
+      "LIKE '_A'"
+    ],
+    "answerIndex": 1,
+    "explanation": "前方一致は 'A%'."
+  },
+  {
+    "id": "basic-070",
+    "level": "basic",
+    "question": "[基礎] 'abc' を含む行を探す LIKE はどれ？",
+    "options": [
+      "LIKE '%abc%'",
+      "LIKE 'abc%'",
+      "LIKE '%abc'",
+      "LIKE '__abc'"
+    ],
+    "answerIndex": 0,
+    "explanation": "包含検索は %abc% 。"
+  },
+  {
+    "id": "basic-071",
+    "level": "basic",
+    "question": "[基礎] 100〜500 を含む範囲検索は？",
+    "options": [
+      "WHERE price BETWEEN 100 AND 500",
+      "WHERE price IN 100 TO 500",
+      "WHERE price FROM 100 TO 500",
+      "WHERE price RANGE 100 500"
+    ],
+    "answerIndex": 0,
+    "explanation": "BETWEEN は両端を含む。"
+  },
+  {
+    "id": "basic-072",
+    "level": "basic",
+    "question": "[基礎] 状態が new または done の行を取る条件は？",
+    "options": [
+      "WHERE status IN ('new','done')",
+      "WHERE status = ('new','done')",
+      "WHERE status HAS ('new','done')",
+      "WHERE status ANY ('new','done')"
+    ],
+    "answerIndex": 0,
+    "explanation": "複数値は IN (...) が簡潔。"
+  },
+  {
+    "id": "basic-073",
+    "level": "basic",
+    "question": "[基礎] NULL 判定に使うのはどれ？",
+    "options": [
+      "= NULL",
+      "IS NULL",
+      "== NULL",
+      "EQUAL NULL"
+    ],
+    "answerIndex": 1,
+    "explanation": "NULL 比較は IS NULL / IS NOT NULL。"
+  },
+  {
+    "id": "basic-074",
+    "level": "basic",
+    "question": "[基礎] 行数を数える集計はどれ？",
+    "options": [
+      "SUM(*)",
+      "COUNT(*)",
+      "SIZE(*)",
+      "TOTAL(*)"
+    ],
+    "answerIndex": 1,
+    "explanation": "行数は COUNT(*)."
+  },
+  {
+    "id": "basic-075",
+    "level": "basic",
+    "question": "[基礎] 部署ごとに人数を出す句の組み合わせは？",
+    "options": [
+      "GROUP BY dept",
+      "ORDER BY dept",
+      "PARTITION dept",
+      "SPLIT BY dept"
+    ],
+    "answerIndex": 0,
+    "explanation": "集計の軸は GROUP BY で指定。"
+  },
+  {
+    "id": "basic-076",
+    "level": "basic",
+    "question": "[基礎] 集計後に件数2以上に絞る句は？",
+    "options": [
+      "WHERE COUNT(*) >= 2",
+      "HAVING COUNT(*) >= 2",
+      "FILTER COUNT>=2",
+      "AFTER COUNT>=2"
+    ],
+    "answerIndex": 1,
+    "explanation": "集計後の条件は HAVING。"
+  },
+  {
+    "id": "basic-077",
+    "level": "basic",
+    "question": "[基礎] INNER JOIN の基本形はどれ？",
+    "options": [
+      "SELECT * FROM A JOIN B ON A.id = B.a_id;",
+      "SELECT * FROM A, B;",
+      "SELECT * FROM A UNION B;",
+      "SELECT * FROM A ADD B;"
+    ],
+    "answerIndex": 0,
+    "explanation": "結合条件は ON で書く。"
+  },
+  {
+    "id": "basic-078",
+    "level": "basic",
+    "question": "[基礎] LEFT JOIN の説明として正しいものは？",
+    "options": [
+      "左表を残し右が無ければ NULL を入れる",
+      "右表だけ残す",
+      "両方に無い行も作る",
+      "常に全組み合わせを返す"
+    ],
+    "answerIndex": 0,
+    "explanation": "LEFT は左優先で欠損は NULL。"
+  },
+  {
+    "id": "basic-079",
+    "level": "basic",
+    "question": "[基礎] UPDATE の正しい例はどれ？",
+    "options": [
+      "UPDATE items SET price = 500 WHERE id = 1;",
+      "UPDATE items price 500 id 1;",
+      "SET price=500 FROM items WHERE id=1;",
+      "CHANGE items SET price=500 id=1;"
+    ],
+    "answerIndex": 0,
+    "explanation": "UPDATE ... SET ... WHERE ... が基本。"
+  },
+  {
+    "id": "basic-080",
+    "level": "basic",
+    "question": "[基礎] DELETE で全削除を避ける基本は？",
+    "options": [
+      "WHERE を付ける",
+      "ORDER BY を付ける",
+      "GROUP BY を付ける",
+      "LIMIT を付けない"
+    ],
+    "answerIndex": 0,
+    "explanation": "DELETE は WHERE なしで全削除になる。"
+  },
+  {
+    "id": "basic-081",
+    "level": "basic",
+    "question": "[基礎] 複数行 INSERT の書き方はどれ？",
+    "options": [
+      "INSERT INTO items (a,b) VALUES (1,'x'), (2,'y');",
+      "INSERT items (1,'x')(2,'y');",
+      "INSERT ALL items VALUES (1,'x')(2,'y');",
+      "ADD items VALUES (1,'x'), (2,'y');"
+    ],
+    "answerIndex": 0,
+    "explanation": "VALUES (...) をカンマ区切りで並べる。"
+  },
+  {
+    "id": "basic-082",
+    "level": "basic",
+    "question": "[基礎] シンプルなテーブル作成の書き方はどれ？",
+    "options": [
+      "CREATE TABLE items (id INT PRIMARY KEY, name TEXT);",
+      "MAKE TABLE items id int, name text;",
+      "NEW TABLE items WITH id,name;",
+      "TABLE items CREATE();"
+    ],
+    "answerIndex": 0,
+    "explanation": "CREATE TABLE <name> (<col defs>) が基本。"
+  },
+  {
+    "id": "basic-083",
+    "level": "basic",
+    "question": "[基礎] 主キーの性質として正しいものは？",
+    "options": [
+      "一意かつ NOT NULL",
+      "NULL を許す",
+      "重複してよい",
+      "文字列のみ可能"
+    ],
+    "answerIndex": 0,
+    "explanation": "PRIMARY KEY は一意 & NOT NULL。"
+  },
+  {
+    "id": "basic-084",
+    "level": "basic",
+    "question": "[基礎] インデックスを張る基本的な理由は？",
+    "options": [
+      "検索を速くする",
+      "ストレージを減らす",
+      "行を暗号化する",
+      "順序をランダムにする"
+    ],
+    "answerIndex": 0,
+    "explanation": "索引は検索・並び替えを高速化する。"
+  },
+  {
+    "id": "basic-085",
+    "level": "basic",
+    "question": "[基礎] 全件取得のSQLはどれ？",
+    "options": [
+      "GET * FROM employees;",
+      "SELECT * FROM employees;",
+      "READ ALL employees;",
+      "FETCH employees;"
+    ],
+    "answerIndex": 1,
+    "explanation": "全件取得は SELECT * FROM <table>."
+  },
+  {
+    "id": "basic-086",
+    "level": "basic",
+    "question": "[基礎] id=10 を取得する正しいSQLはどれ？",
+    "options": [
+      "SELECT * FROM employees WHERE id = 10;",
+      "SELECT * employees id 10;",
+      "GET employees WHERE id 10;",
+      "READ employees id=10;"
+    ],
+    "answerIndex": 0,
+    "explanation": "条件は WHERE 句で書く。"
+  },
+  {
+    "id": "basic-087",
+    "level": "basic",
+    "question": "[基礎] 価格を高い順に並べる ORDER BY はどれ？",
+    "options": [
+      "ORDER BY price ASC",
+      "ORDER BY price DESC",
+      "GROUP BY price DESC",
+      "SORT price HIGH"
+    ],
+    "answerIndex": 1,
+    "explanation": "DESC は降順、ASC は昇順。"
+  },
+  {
+    "id": "basic-088",
+    "level": "basic",
+    "question": "[基礎] 重複行を除いて列を取得するキーワードは？",
+    "options": [
+      "ONLY",
+      "DISTINCT",
+      "UNIQUE ROWS",
+      "ONCE"
+    ],
+    "answerIndex": 1,
+    "explanation": "重複排除は DISTINCT。"
+  },
+  {
+    "id": "basic-089",
+    "level": "basic",
+    "question": "[基礎] 上位5件を返す一般的な書き方は？",
+    "options": [
+      "SELECT * FROM items LIMIT 5;",
+      "SELECT TOP 5 FROM items;",
+      "SELECT FIRST 5 items;",
+      "SELECT * ITEMS(5);"
+    ],
+    "answerIndex": 0,
+    "explanation": "MySQL/PG/SQLite では LIMIT, SQL Server は TOP。"
+  },
+  {
+    "id": "basic-090",
+    "level": "basic",
+    "question": "[基礎] name が 'A' で始まる行を探す LIKE はどれ？",
+    "options": [
+      "LIKE '%A'",
+      "LIKE 'A%'",
+      "LIKE '%A%'",
+      "LIKE '_A'"
+    ],
+    "answerIndex": 1,
+    "explanation": "前方一致は 'A%'."
+  },
+  {
+    "id": "basic-091",
+    "level": "basic",
+    "question": "[基礎] 'abc' を含む行を探す LIKE はどれ？",
+    "options": [
+      "LIKE '%abc%'",
+      "LIKE 'abc%'",
+      "LIKE '%abc'",
+      "LIKE '__abc'"
+    ],
+    "answerIndex": 0,
+    "explanation": "包含検索は %abc% 。"
+  },
+  {
+    "id": "basic-092",
+    "level": "basic",
+    "question": "[基礎] 100〜500 を含む範囲検索は？",
+    "options": [
+      "WHERE price BETWEEN 100 AND 500",
+      "WHERE price IN 100 TO 500",
+      "WHERE price FROM 100 TO 500",
+      "WHERE price RANGE 100 500"
+    ],
+    "answerIndex": 0,
+    "explanation": "BETWEEN は両端を含む。"
+  },
+  {
+    "id": "basic-093",
+    "level": "basic",
+    "question": "[基礎] 状態が new または done の行を取る条件は？",
+    "options": [
+      "WHERE status IN ('new','done')",
+      "WHERE status = ('new','done')",
+      "WHERE status HAS ('new','done')",
+      "WHERE status ANY ('new','done')"
+    ],
+    "answerIndex": 0,
+    "explanation": "複数値は IN (...) が簡潔。"
+  },
+  {
+    "id": "basic-094",
+    "level": "basic",
+    "question": "[基礎] NULL 判定に使うのはどれ？",
+    "options": [
+      "= NULL",
+      "IS NULL",
+      "== NULL",
+      "EQUAL NULL"
+    ],
+    "answerIndex": 1,
+    "explanation": "NULL 比較は IS NULL / IS NOT NULL。"
+  },
+  {
+    "id": "basic-095",
+    "level": "basic",
+    "question": "[基礎] 行数を数える集計はどれ？",
+    "options": [
+      "SUM(*)",
+      "COUNT(*)",
+      "SIZE(*)",
+      "TOTAL(*)"
+    ],
+    "answerIndex": 1,
+    "explanation": "行数は COUNT(*)."
+  },
+  {
+    "id": "basic-096",
+    "level": "basic",
+    "question": "[基礎] 部署ごとに人数を出す句の組み合わせは？",
+    "options": [
+      "GROUP BY dept",
+      "ORDER BY dept",
+      "PARTITION dept",
+      "SPLIT BY dept"
+    ],
+    "answerIndex": 0,
+    "explanation": "集計の軸は GROUP BY で指定。"
+  },
+  {
+    "id": "basic-097",
+    "level": "basic",
+    "question": "[基礎] 集計後に件数2以上に絞る句は？",
+    "options": [
+      "WHERE COUNT(*) >= 2",
+      "HAVING COUNT(*) >= 2",
+      "FILTER COUNT>=2",
+      "AFTER COUNT>=2"
+    ],
+    "answerIndex": 1,
+    "explanation": "集計後の条件は HAVING。"
+  },
+  {
+    "id": "basic-098",
+    "level": "basic",
+    "question": "[基礎] INNER JOIN の基本形はどれ？",
+    "options": [
+      "SELECT * FROM A JOIN B ON A.id = B.a_id;",
+      "SELECT * FROM A, B;",
+      "SELECT * FROM A UNION B;",
+      "SELECT * FROM A ADD B;"
+    ],
+    "answerIndex": 0,
+    "explanation": "結合条件は ON で書く。"
+  },
+  {
+    "id": "basic-099",
+    "level": "basic",
+    "question": "[基礎] LEFT JOIN の説明として正しいものは？",
+    "options": [
+      "左表を残し右が無ければ NULL を入れる",
+      "右表だけ残す",
+      "両方に無い行も作る",
+      "常に全組み合わせを返す"
+    ],
+    "answerIndex": 0,
+    "explanation": "LEFT は左優先で欠損は NULL。"
+  },
+  {
+    "id": "basic-100",
+    "level": "basic",
+    "question": "[基礎] UPDATE の正しい例はどれ？",
+    "options": [
+      "UPDATE items SET price = 500 WHERE id = 1;",
+      "UPDATE items price 500 id 1;",
+      "SET price=500 FROM items WHERE id=1;",
+      "CHANGE items SET price=500 id=1;"
+    ],
+    "answerIndex": 0,
+    "explanation": "UPDATE ... SET ... WHERE ... が基本。"
+  },
+  {
+    "id": "standard-006",
+    "level": "standard",
+    "question": "[標準] 仮想問題 6: WHERE 句で NULL を判定する演算子はどれ？",
+    "options": [
+      "= NULL",
+      "IS NULL",
+      "== NULL",
+      "EQUAL NULL"
+    ],
+    "answerIndex": 1,
+    "explanation": "NULL 判定は IS NULL / IS NOT NULL を使う。"
+  },
+  {
+    "id": "standard-007",
+    "level": "standard",
+    "question": "[標準] 仮想問題 7: WHERE 句で NULL を判定する演算子はどれ？",
+    "options": [
+      "= NULL",
+      "IS NULL",
+      "== NULL",
+      "EQUAL NULL"
+    ],
+    "answerIndex": 1,
+    "explanation": "NULL 判定は IS NULL / IS NOT NULL を使う。"
+  },
+  {
+    "id": "standard-008",
+    "level": "standard",
+    "question": "[標準] 仮想問題 8: WHERE 句で NULL を判定する演算子はどれ？",
+    "options": [
+      "= NULL",
+      "IS NULL",
+      "== NULL",
+      "EQUAL NULL"
+    ],
+    "answerIndex": 1,
+    "explanation": "NULL 判定は IS NULL / IS NOT NULL を使う。"
+  },
+  {
+    "id": "standard-009",
+    "level": "standard",
+    "question": "[標準] 仮想問題 9: WHERE 句で NULL を判定する演算子はどれ？",
+    "options": [
+      "= NULL",
+      "IS NULL",
+      "== NULL",
+      "EQUAL NULL"
+    ],
+    "answerIndex": 1,
+    "explanation": "NULL 判定は IS NULL / IS NOT NULL を使う。"
+  },
+  {
+    "id": "standard-010",
+    "level": "standard",
+    "question": "[標準] 仮想問題 10: WHERE 句で NULL を判定する演算子はどれ？",
+    "options": [
+      "= NULL",
+      "IS NULL",
+      "== NULL",
+      "EQUAL NULL"
+    ],
+    "answerIndex": 1,
+    "explanation": "NULL 判定は IS NULL / IS NOT NULL を使う。"
+  },
+  {
+    "id": "standard-011",
+    "level": "standard",
+    "question": "[標準] 仮想問題 11: WHERE 句で NULL を判定する演算子はどれ？",
+    "options": [
+      "= NULL",
+      "IS NULL",
+      "== NULL",
+      "EQUAL NULL"
+    ],
+    "answerIndex": 1,
+    "explanation": "NULL 判定は IS NULL / IS NOT NULL を使う。"
+  },
+  {
+    "id": "standard-012",
+    "level": "standard",
+    "question": "[標準] 仮想問題 12: WHERE 句で NULL を判定する演算子はどれ？",
+    "options": [
+      "= NULL",
+      "IS NULL",
+      "== NULL",
+      "EQUAL NULL"
+    ],
+    "answerIndex": 1,
+    "explanation": "NULL 判定は IS NULL / IS NOT NULL を使う。"
+  },
+  {
+    "id": "standard-013",
+    "level": "standard",
+    "question": "[標準] 仮想問題 13: WHERE 句で NULL を判定する演算子はどれ？",
+    "options": [
+      "= NULL",
+      "IS NULL",
+      "== NULL",
+      "EQUAL NULL"
+    ],
+    "answerIndex": 1,
+    "explanation": "NULL 判定は IS NULL / IS NOT NULL を使う。"
+  },
+  {
+    "id": "standard-014",
+    "level": "standard",
+    "question": "[標準] 仮想問題 14: WHERE 句で NULL を判定する演算子はどれ？",
+    "options": [
+      "= NULL",
+      "IS NULL",
+      "== NULL",
+      "EQUAL NULL"
+    ],
+    "answerIndex": 1,
+    "explanation": "NULL 判定は IS NULL / IS NOT NULL を使う。"
+  },
+  {
+    "id": "standard-015",
+    "level": "standard",
+    "question": "[標準] 仮想問題 15: WHERE 句で NULL を判定する演算子はどれ？",
+    "options": [
+      "= NULL",
+      "IS NULL",
+      "== NULL",
+      "EQUAL NULL"
+    ],
+    "answerIndex": 1,
+    "explanation": "NULL 判定は IS NULL / IS NOT NULL を使う。"
+  },
+  {
+    "id": "standard-016",
+    "level": "standard",
+    "question": "[標準] 仮想問題 16: WHERE 句で NULL を判定する演算子はどれ？",
+    "options": [
+      "= NULL",
+      "IS NULL",
+      "== NULL",
+      "EQUAL NULL"
+    ],
+    "answerIndex": 1,
+    "explanation": "NULL 判定は IS NULL / IS NOT NULL を使う。"
+  },
+  {
+    "id": "standard-017",
+    "level": "standard",
+    "question": "[標準] 仮想問題 17: WHERE 句で NULL を判定する演算子はどれ？",
+    "options": [
+      "= NULL",
+      "IS NULL",
+      "== NULL",
+      "EQUAL NULL"
+    ],
+    "answerIndex": 1,
+    "explanation": "NULL 判定は IS NULL / IS NOT NULL を使う。"
+  },
+  {
+    "id": "standard-018",
+    "level": "standard",
+    "question": "[標準] 仮想問題 18: WHERE 句で NULL を判定する演算子はどれ？",
+    "options": [
+      "= NULL",
+      "IS NULL",
+      "== NULL",
+      "EQUAL NULL"
+    ],
+    "answerIndex": 1,
+    "explanation": "NULL 判定は IS NULL / IS NOT NULL を使う。"
+  },
+  {
+    "id": "standard-019",
+    "level": "standard",
+    "question": "[標準] 仮想問題 19: WHERE 句で NULL を判定する演算子はどれ？",
+    "options": [
+      "= NULL",
+      "IS NULL",
+      "== NULL",
+      "EQUAL NULL"
+    ],
+    "answerIndex": 1,
+    "explanation": "NULL 判定は IS NULL / IS NOT NULL を使う。"
+  },
+  {
+    "id": "standard-020",
+    "level": "standard",
+    "question": "[標準] 仮想問題 20: WHERE 句で NULL を判定する演算子はどれ？",
+    "options": [
+      "= NULL",
+      "IS NULL",
+      "== NULL",
+      "EQUAL NULL"
+    ],
+    "answerIndex": 1,
+    "explanation": "NULL 判定は IS NULL / IS NOT NULL を使う。"
+  },
+  {
+    "id": "standard-021",
+    "level": "standard",
+    "question": "[標準] 仮想問題 21: WHERE 句で NULL を判定する演算子はどれ？",
+    "options": [
+      "= NULL",
+      "IS NULL",
+      "== NULL",
+      "EQUAL NULL"
+    ],
+    "answerIndex": 1,
+    "explanation": "NULL 判定は IS NULL / IS NOT NULL を使う。"
+  },
+  {
+    "id": "standard-022",
+    "level": "standard",
+    "question": "[標準] 仮想問題 22: WHERE 句で NULL を判定する演算子はどれ？",
+    "options": [
+      "= NULL",
+      "IS NULL",
+      "== NULL",
+      "EQUAL NULL"
+    ],
+    "answerIndex": 1,
+    "explanation": "NULL 判定は IS NULL / IS NOT NULL を使う。"
+  },
+  {
+    "id": "standard-023",
+    "level": "standard",
+    "question": "[標準] 仮想問題 23: WHERE 句で NULL を判定する演算子はどれ？",
+    "options": [
+      "= NULL",
+      "IS NULL",
+      "== NULL",
+      "EQUAL NULL"
+    ],
+    "answerIndex": 1,
+    "explanation": "NULL 判定は IS NULL / IS NOT NULL を使う。"
+  },
+  {
+    "id": "standard-024",
+    "level": "standard",
+    "question": "[標準] 仮想問題 24: WHERE 句で NULL を判定する演算子はどれ？",
+    "options": [
+      "= NULL",
+      "IS NULL",
+      "== NULL",
+      "EQUAL NULL"
+    ],
+    "answerIndex": 1,
+    "explanation": "NULL 判定は IS NULL / IS NOT NULL を使う。"
+  },
+  {
+    "id": "standard-025",
+    "level": "standard",
+    "question": "[標準] 仮想問題 25: WHERE 句で NULL を判定する演算子はどれ？",
+    "options": [
+      "= NULL",
+      "IS NULL",
+      "== NULL",
+      "EQUAL NULL"
+    ],
+    "answerIndex": 1,
+    "explanation": "NULL 判定は IS NULL / IS NOT NULL を使う。"
+  },
+  {
+    "id": "standard-026",
+    "level": "standard",
+    "question": "[標準] 仮想問題 26: WHERE 句で NULL を判定する演算子はどれ？",
+    "options": [
+      "= NULL",
+      "IS NULL",
+      "== NULL",
+      "EQUAL NULL"
+    ],
+    "answerIndex": 1,
+    "explanation": "NULL 判定は IS NULL / IS NOT NULL を使う。"
+  },
+  {
+    "id": "standard-027",
+    "level": "standard",
+    "question": "[標準] 仮想問題 27: WHERE 句で NULL を判定する演算子はどれ？",
+    "options": [
+      "= NULL",
+      "IS NULL",
+      "== NULL",
+      "EQUAL NULL"
+    ],
+    "answerIndex": 1,
+    "explanation": "NULL 判定は IS NULL / IS NOT NULL を使う。"
+  },
+  {
+    "id": "standard-028",
+    "level": "standard",
+    "question": "[標準] 仮想問題 28: WHERE 句で NULL を判定する演算子はどれ？",
+    "options": [
+      "= NULL",
+      "IS NULL",
+      "== NULL",
+      "EQUAL NULL"
+    ],
+    "answerIndex": 1,
+    "explanation": "NULL 判定は IS NULL / IS NOT NULL を使う。"
+  },
+  {
+    "id": "standard-029",
+    "level": "standard",
+    "question": "[標準] 仮想問題 29: WHERE 句で NULL を判定する演算子はどれ？",
+    "options": [
+      "= NULL",
+      "IS NULL",
+      "== NULL",
+      "EQUAL NULL"
+    ],
+    "answerIndex": 1,
+    "explanation": "NULL 判定は IS NULL / IS NOT NULL を使う。"
+  },
+  {
+    "id": "standard-030",
+    "level": "standard",
+    "question": "[標準] 仮想問題 30: WHERE 句で NULL を判定する演算子はどれ？",
+    "options": [
+      "= NULL",
+      "IS NULL",
+      "== NULL",
+      "EQUAL NULL"
+    ],
+    "answerIndex": 1,
+    "explanation": "NULL 判定は IS NULL / IS NOT NULL を使う。"
+  },
+  {
+    "id": "standard-031",
+    "level": "standard",
+    "question": "[標準] 仮想問題 31: WHERE 句で NULL を判定する演算子はどれ？",
+    "options": [
+      "= NULL",
+      "IS NULL",
+      "== NULL",
+      "EQUAL NULL"
+    ],
+    "answerIndex": 1,
+    "explanation": "NULL 判定は IS NULL / IS NOT NULL を使う。"
+  },
+  {
+    "id": "standard-032",
+    "level": "standard",
+    "question": "[標準] 仮想問題 32: WHERE 句で NULL を判定する演算子はどれ？",
+    "options": [
+      "= NULL",
+      "IS NULL",
+      "== NULL",
+      "EQUAL NULL"
+    ],
+    "answerIndex": 1,
+    "explanation": "NULL 判定は IS NULL / IS NOT NULL を使う。"
+  },
+  {
+    "id": "standard-033",
+    "level": "standard",
+    "question": "[標準] 仮想問題 33: WHERE 句で NULL を判定する演算子はどれ？",
+    "options": [
+      "= NULL",
+      "IS NULL",
+      "== NULL",
+      "EQUAL NULL"
+    ],
+    "answerIndex": 1,
+    "explanation": "NULL 判定は IS NULL / IS NOT NULL を使う。"
+  },
+  {
+    "id": "standard-034",
+    "level": "standard",
+    "question": "[標準] 仮想問題 34: WHERE 句で NULL を判定する演算子はどれ？",
+    "options": [
+      "= NULL",
+      "IS NULL",
+      "== NULL",
+      "EQUAL NULL"
+    ],
+    "answerIndex": 1,
+    "explanation": "NULL 判定は IS NULL / IS NOT NULL を使う。"
+  },
+  {
+    "id": "standard-035",
+    "level": "standard",
+    "question": "[標準] 仮想問題 35: WHERE 句で NULL を判定する演算子はどれ？",
+    "options": [
+      "= NULL",
+      "IS NULL",
+      "== NULL",
+      "EQUAL NULL"
+    ],
+    "answerIndex": 1,
+    "explanation": "NULL 判定は IS NULL / IS NOT NULL を使う。"
+  },
+  {
+    "id": "standard-036",
+    "level": "standard",
+    "question": "[標準] 仮想問題 36: WHERE 句で NULL を判定する演算子はどれ？",
+    "options": [
+      "= NULL",
+      "IS NULL",
+      "== NULL",
+      "EQUAL NULL"
+    ],
+    "answerIndex": 1,
+    "explanation": "NULL 判定は IS NULL / IS NOT NULL を使う。"
+  },
+  {
+    "id": "standard-037",
+    "level": "standard",
+    "question": "[標準] 仮想問題 37: WHERE 句で NULL を判定する演算子はどれ？",
+    "options": [
+      "= NULL",
+      "IS NULL",
+      "== NULL",
+      "EQUAL NULL"
+    ],
+    "answerIndex": 1,
+    "explanation": "NULL 判定は IS NULL / IS NOT NULL を使う。"
+  },
+  {
+    "id": "standard-038",
+    "level": "standard",
+    "question": "[標準] 仮想問題 38: WHERE 句で NULL を判定する演算子はどれ？",
+    "options": [
+      "= NULL",
+      "IS NULL",
+      "== NULL",
+      "EQUAL NULL"
+    ],
+    "answerIndex": 1,
+    "explanation": "NULL 判定は IS NULL / IS NOT NULL を使う。"
+  },
+  {
+    "id": "standard-039",
+    "level": "standard",
+    "question": "[標準] 仮想問題 39: WHERE 句で NULL を判定する演算子はどれ？",
+    "options": [
+      "= NULL",
+      "IS NULL",
+      "== NULL",
+      "EQUAL NULL"
+    ],
+    "answerIndex": 1,
+    "explanation": "NULL 判定は IS NULL / IS NOT NULL を使う。"
+  },
+  {
+    "id": "standard-040",
+    "level": "standard",
+    "question": "[標準] 仮想問題 40: WHERE 句で NULL を判定する演算子はどれ？",
+    "options": [
+      "= NULL",
+      "IS NULL",
+      "== NULL",
+      "EQUAL NULL"
+    ],
+    "answerIndex": 1,
+    "explanation": "NULL 判定は IS NULL / IS NOT NULL を使う。"
+  },
+  {
+    "id": "standard-041",
+    "level": "standard",
+    "question": "[標準] 仮想問題 41: WHERE 句で NULL を判定する演算子はどれ？",
+    "options": [
+      "= NULL",
+      "IS NULL",
+      "== NULL",
+      "EQUAL NULL"
+    ],
+    "answerIndex": 1,
+    "explanation": "NULL 判定は IS NULL / IS NOT NULL を使う。"
+  },
+  {
+    "id": "standard-042",
+    "level": "standard",
+    "question": "[標準] 仮想問題 42: WHERE 句で NULL を判定する演算子はどれ？",
+    "options": [
+      "= NULL",
+      "IS NULL",
+      "== NULL",
+      "EQUAL NULL"
+    ],
+    "answerIndex": 1,
+    "explanation": "NULL 判定は IS NULL / IS NOT NULL を使う。"
+  },
+  {
+    "id": "standard-043",
+    "level": "standard",
+    "question": "[標準] 仮想問題 43: WHERE 句で NULL を判定する演算子はどれ？",
+    "options": [
+      "= NULL",
+      "IS NULL",
+      "== NULL",
+      "EQUAL NULL"
+    ],
+    "answerIndex": 1,
+    "explanation": "NULL 判定は IS NULL / IS NOT NULL を使う。"
+  },
+  {
+    "id": "standard-044",
+    "level": "standard",
+    "question": "[標準] 仮想問題 44: WHERE 句で NULL を判定する演算子はどれ？",
+    "options": [
+      "= NULL",
+      "IS NULL",
+      "== NULL",
+      "EQUAL NULL"
+    ],
+    "answerIndex": 1,
+    "explanation": "NULL 判定は IS NULL / IS NOT NULL を使う。"
+  },
+  {
+    "id": "standard-045",
+    "level": "standard",
+    "question": "[標準] 仮想問題 45: WHERE 句で NULL を判定する演算子はどれ？",
+    "options": [
+      "= NULL",
+      "IS NULL",
+      "== NULL",
+      "EQUAL NULL"
+    ],
+    "answerIndex": 1,
+    "explanation": "NULL 判定は IS NULL / IS NOT NULL を使う。"
+  },
+  {
+    "id": "standard-046",
+    "level": "standard",
+    "question": "[標準] 仮想問題 46: WHERE 句で NULL を判定する演算子はどれ？",
+    "options": [
+      "= NULL",
+      "IS NULL",
+      "== NULL",
+      "EQUAL NULL"
+    ],
+    "answerIndex": 1,
+    "explanation": "NULL 判定は IS NULL / IS NOT NULL を使う。"
+  },
+  {
+    "id": "standard-047",
+    "level": "standard",
+    "question": "[標準] 仮想問題 47: WHERE 句で NULL を判定する演算子はどれ？",
+    "options": [
+      "= NULL",
+      "IS NULL",
+      "== NULL",
+      "EQUAL NULL"
+    ],
+    "answerIndex": 1,
+    "explanation": "NULL 判定は IS NULL / IS NOT NULL を使う。"
+  },
+  {
+    "id": "standard-048",
+    "level": "standard",
+    "question": "[標準] 仮想問題 48: WHERE 句で NULL を判定する演算子はどれ？",
+    "options": [
+      "= NULL",
+      "IS NULL",
+      "== NULL",
+      "EQUAL NULL"
+    ],
+    "answerIndex": 1,
+    "explanation": "NULL 判定は IS NULL / IS NOT NULL を使う。"
+  },
+  {
+    "id": "standard-049",
+    "level": "standard",
+    "question": "[標準] 仮想問題 49: WHERE 句で NULL を判定する演算子はどれ？",
+    "options": [
+      "= NULL",
+      "IS NULL",
+      "== NULL",
+      "EQUAL NULL"
+    ],
+    "answerIndex": 1,
+    "explanation": "NULL 判定は IS NULL / IS NOT NULL を使う。"
+  },
+  {
+    "id": "standard-050",
+    "level": "standard",
+    "question": "[標準] 仮想問題 50: WHERE 句で NULL を判定する演算子はどれ？",
+    "options": [
+      "= NULL",
+      "IS NULL",
+      "== NULL",
+      "EQUAL NULL"
+    ],
+    "answerIndex": 1,
+    "explanation": "NULL 判定は IS NULL / IS NOT NULL を使う。"
+  },
+  {
+    "id": "standard-1",
+    "level": "standard",
+    "question": "同じ user_id ごとに最新の注文1件を取る際に有効な関数はどれ？",
+    "options": [
+      "SUM()",
+      "ROW_NUMBER() OVER(...)",
+      "GROUP_CONCAT()",
+      "MEDIAN()"
+    ],
+    "answerIndex": 1,
+    "explanation": "ウィンドウ関数 ROW_NUMBER() OVER(PARTITION BY user_id ORDER BY created_at DESC) で最新1件に順位を付けられる。"
+  },
+  {
+    "id": "standard-2",
+    "level": "standard",
+    "question": "LEFT JOIN と INNER JOIN の違いとして正しいものは？",
+    "options": [
+      "LEFT JOIN は結合条件を無視する",
+      "INNER JOIN は左表を必ず残す",
+      "LEFT JOIN は左表の行を残し、右表に無い場合は NULL を入れる",
+      "INNER JOIN は常に全組み合わせを返す"
+    ],
+    "answerIndex": 2,
+    "explanation": "LEFT JOIN は左表優先で、右側に無い行は NULL が入る。INNER は両方に存在する行のみ。"
+  },
+  {
+    "id": "standard-3",
+    "level": "standard",
+    "question": "インデックスが効きにくい条件はどれ？",
+    "options": [
+      "price > 100",
+      "name LIKE 'abc%'",
+      "status IN ('new','done')",
+      "LIKE '%abc'"
+    ],
+    "answerIndex": 3,
+    "explanation": "前方ワイルドカード LIKE '%abc' は先頭が不定でインデックスを使いにくい。"
+  },
+  {
+    "id": "standard-4",
+    "level": "standard",
+    "question": "トランザクション分離レベル READ COMMITTED の特徴は？",
+    "options": [
+      "他トランザクションの未コミットを読める",
+      "コミット済みのみ読めるが再読込で値が変わることがある",
+      "同じ SELECT は常に同じ結果を返す",
+      "書き込みは直ちに他から見える"
+    ],
+    "answerIndex": 1,
+    "explanation": "READ COMMITTED は未コミットを読まないが、再読で変化しうる（非再現読込）。"
+  },
+  {
+    "id": "standard-5",
+    "level": "standard",
+    "question": "大量 INSERT の前に有効なチューニングとして適切なのは？",
+    "options": [
+      "全文検索インデックスを張る",
+      "不要なインデックスを一時的に外す",
+      "毎行 COMMIT する",
+      "SELECT * を多用する"
+    ],
+    "answerIndex": 1,
+    "explanation": "INSERT はインデックス更新コストが大きい。不要なものを外すと高速化しやすい。"
+  },
+  {
+    "id": "hard-006",
+    "level": "hard",
+    "question": "[難問] 仮想問題 6: ウィンドウ関数で順位を付ける関数はどれ？",
+    "options": [
+      "RANK() OVER(...) ",
+      "COUNT()",
+      "SUM()",
+      "GROUPING()"
+    ],
+    "answerIndex": 0,
+    "explanation": "順位付けは RANK()/DENSE_RANK()/ROW_NUMBER() などのウィンドウ関数を使う。"
+  },
+  {
+    "id": "hard-007",
+    "level": "hard",
+    "question": "[難問] 仮想問題 7: ウィンドウ関数で順位を付ける関数はどれ？",
+    "options": [
+      "RANK() OVER(...) ",
+      "COUNT()",
+      "SUM()",
+      "GROUPING()"
+    ],
+    "answerIndex": 0,
+    "explanation": "順位付けは RANK()/DENSE_RANK()/ROW_NUMBER() などのウィンドウ関数を使う。"
+  },
+  {
+    "id": "hard-008",
+    "level": "hard",
+    "question": "[難問] 仮想問題 8: ウィンドウ関数で順位を付ける関数はどれ？",
+    "options": [
+      "RANK() OVER(...) ",
+      "COUNT()",
+      "SUM()",
+      "GROUPING()"
+    ],
+    "answerIndex": 0,
+    "explanation": "順位付けは RANK()/DENSE_RANK()/ROW_NUMBER() などのウィンドウ関数を使う。"
+  },
+  {
+    "id": "hard-009",
+    "level": "hard",
+    "question": "[難問] 仮想問題 9: ウィンドウ関数で順位を付ける関数はどれ？",
+    "options": [
+      "RANK() OVER(...) ",
+      "COUNT()",
+      "SUM()",
+      "GROUPING()"
+    ],
+    "answerIndex": 0,
+    "explanation": "順位付けは RANK()/DENSE_RANK()/ROW_NUMBER() などのウィンドウ関数を使う。"
+  },
+  {
+    "id": "hard-010",
+    "level": "hard",
+    "question": "[難問] 仮想問題 10: ウィンドウ関数で順位を付ける関数はどれ？",
+    "options": [
+      "RANK() OVER(...) ",
+      "COUNT()",
+      "SUM()",
+      "GROUPING()"
+    ],
+    "answerIndex": 0,
+    "explanation": "順位付けは RANK()/DENSE_RANK()/ROW_NUMBER() などのウィンドウ関数を使う。"
+  },
+  {
+    "id": "hard-011",
+    "level": "hard",
+    "question": "[難問] 仮想問題 11: ウィンドウ関数で順位を付ける関数はどれ？",
+    "options": [
+      "RANK() OVER(...) ",
+      "COUNT()",
+      "SUM()",
+      "GROUPING()"
+    ],
+    "answerIndex": 0,
+    "explanation": "順位付けは RANK()/DENSE_RANK()/ROW_NUMBER() などのウィンドウ関数を使う。"
+  },
+  {
+    "id": "hard-012",
+    "level": "hard",
+    "question": "[難問] 仮想問題 12: ウィンドウ関数で順位を付ける関数はどれ？",
+    "options": [
+      "RANK() OVER(...) ",
+      "COUNT()",
+      "SUM()",
+      "GROUPING()"
+    ],
+    "answerIndex": 0,
+    "explanation": "順位付けは RANK()/DENSE_RANK()/ROW_NUMBER() などのウィンドウ関数を使う。"
+  },
+  {
+    "id": "hard-013",
+    "level": "hard",
+    "question": "[難問] 仮想問題 13: ウィンドウ関数で順位を付ける関数はどれ？",
+    "options": [
+      "RANK() OVER(...) ",
+      "COUNT()",
+      "SUM()",
+      "GROUPING()"
+    ],
+    "answerIndex": 0,
+    "explanation": "順位付けは RANK()/DENSE_RANK()/ROW_NUMBER() などのウィンドウ関数を使う。"
+  },
+  {
+    "id": "hard-014",
+    "level": "hard",
+    "question": "[難問] 仮想問題 14: ウィンドウ関数で順位を付ける関数はどれ？",
+    "options": [
+      "RANK() OVER(...) ",
+      "COUNT()",
+      "SUM()",
+      "GROUPING()"
+    ],
+    "answerIndex": 0,
+    "explanation": "順位付けは RANK()/DENSE_RANK()/ROW_NUMBER() などのウィンドウ関数を使う。"
+  },
+  {
+    "id": "hard-015",
+    "level": "hard",
+    "question": "[難問] 仮想問題 15: ウィンドウ関数で順位を付ける関数はどれ？",
+    "options": [
+      "RANK() OVER(...) ",
+      "COUNT()",
+      "SUM()",
+      "GROUPING()"
+    ],
+    "answerIndex": 0,
+    "explanation": "順位付けは RANK()/DENSE_RANK()/ROW_NUMBER() などのウィンドウ関数を使う。"
+  },
+  {
+    "id": "hard-016",
+    "level": "hard",
+    "question": "[難問] 仮想問題 16: ウィンドウ関数で順位を付ける関数はどれ？",
+    "options": [
+      "RANK() OVER(...) ",
+      "COUNT()",
+      "SUM()",
+      "GROUPING()"
+    ],
+    "answerIndex": 0,
+    "explanation": "順位付けは RANK()/DENSE_RANK()/ROW_NUMBER() などのウィンドウ関数を使う。"
+  },
+  {
+    "id": "hard-017",
+    "level": "hard",
+    "question": "[難問] 仮想問題 17: ウィンドウ関数で順位を付ける関数はどれ？",
+    "options": [
+      "RANK() OVER(...) ",
+      "COUNT()",
+      "SUM()",
+      "GROUPING()"
+    ],
+    "answerIndex": 0,
+    "explanation": "順位付けは RANK()/DENSE_RANK()/ROW_NUMBER() などのウィンドウ関数を使う。"
+  },
+  {
+    "id": "hard-018",
+    "level": "hard",
+    "question": "[難問] 仮想問題 18: ウィンドウ関数で順位を付ける関数はどれ？",
+    "options": [
+      "RANK() OVER(...) ",
+      "COUNT()",
+      "SUM()",
+      "GROUPING()"
+    ],
+    "answerIndex": 0,
+    "explanation": "順位付けは RANK()/DENSE_RANK()/ROW_NUMBER() などのウィンドウ関数を使う。"
+  },
+  {
+    "id": "hard-019",
+    "level": "hard",
+    "question": "[難問] 仮想問題 19: ウィンドウ関数で順位を付ける関数はどれ？",
+    "options": [
+      "RANK() OVER(...) ",
+      "COUNT()",
+      "SUM()",
+      "GROUPING()"
+    ],
+    "answerIndex": 0,
+    "explanation": "順位付けは RANK()/DENSE_RANK()/ROW_NUMBER() などのウィンドウ関数を使う。"
+  },
+  {
+    "id": "hard-020",
+    "level": "hard",
+    "question": "[難問] 仮想問題 20: ウィンドウ関数で順位を付ける関数はどれ？",
+    "options": [
+      "RANK() OVER(...) ",
+      "COUNT()",
+      "SUM()",
+      "GROUPING()"
+    ],
+    "answerIndex": 0,
+    "explanation": "順位付けは RANK()/DENSE_RANK()/ROW_NUMBER() などのウィンドウ関数を使う。"
+  },
+  {
+    "id": "hard-021",
+    "level": "hard",
+    "question": "[難問] 仮想問題 21: ウィンドウ関数で順位を付ける関数はどれ？",
+    "options": [
+      "RANK() OVER(...) ",
+      "COUNT()",
+      "SUM()",
+      "GROUPING()"
+    ],
+    "answerIndex": 0,
+    "explanation": "順位付けは RANK()/DENSE_RANK()/ROW_NUMBER() などのウィンドウ関数を使う。"
+  },
+  {
+    "id": "hard-022",
+    "level": "hard",
+    "question": "[難問] 仮想問題 22: ウィンドウ関数で順位を付ける関数はどれ？",
+    "options": [
+      "RANK() OVER(...) ",
+      "COUNT()",
+      "SUM()",
+      "GROUPING()"
+    ],
+    "answerIndex": 0,
+    "explanation": "順位付けは RANK()/DENSE_RANK()/ROW_NUMBER() などのウィンドウ関数を使う。"
+  },
+  {
+    "id": "hard-023",
+    "level": "hard",
+    "question": "[難問] 仮想問題 23: ウィンドウ関数で順位を付ける関数はどれ？",
+    "options": [
+      "RANK() OVER(...) ",
+      "COUNT()",
+      "SUM()",
+      "GROUPING()"
+    ],
+    "answerIndex": 0,
+    "explanation": "順位付けは RANK()/DENSE_RANK()/ROW_NUMBER() などのウィンドウ関数を使う。"
+  },
+  {
+    "id": "hard-024",
+    "level": "hard",
+    "question": "[難問] 仮想問題 24: ウィンドウ関数で順位を付ける関数はどれ？",
+    "options": [
+      "RANK() OVER(...) ",
+      "COUNT()",
+      "SUM()",
+      "GROUPING()"
+    ],
+    "answerIndex": 0,
+    "explanation": "順位付けは RANK()/DENSE_RANK()/ROW_NUMBER() などのウィンドウ関数を使う。"
+  },
+  {
+    "id": "hard-025",
+    "level": "hard",
+    "question": "[難問] 仮想問題 25: ウィンドウ関数で順位を付ける関数はどれ？",
+    "options": [
+      "RANK() OVER(...) ",
+      "COUNT()",
+      "SUM()",
+      "GROUPING()"
+    ],
+    "answerIndex": 0,
+    "explanation": "順位付けは RANK()/DENSE_RANK()/ROW_NUMBER() などのウィンドウ関数を使う。"
+  },
+  {
+    "id": "hard-026",
+    "level": "hard",
+    "question": "[難問] 仮想問題 26: ウィンドウ関数で順位を付ける関数はどれ？",
+    "options": [
+      "RANK() OVER(...) ",
+      "COUNT()",
+      "SUM()",
+      "GROUPING()"
+    ],
+    "answerIndex": 0,
+    "explanation": "順位付けは RANK()/DENSE_RANK()/ROW_NUMBER() などのウィンドウ関数を使う。"
+  },
+  {
+    "id": "hard-027",
+    "level": "hard",
+    "question": "[難問] 仮想問題 27: ウィンドウ関数で順位を付ける関数はどれ？",
+    "options": [
+      "RANK() OVER(...) ",
+      "COUNT()",
+      "SUM()",
+      "GROUPING()"
+    ],
+    "answerIndex": 0,
+    "explanation": "順位付けは RANK()/DENSE_RANK()/ROW_NUMBER() などのウィンドウ関数を使う。"
+  },
+  {
+    "id": "hard-028",
+    "level": "hard",
+    "question": "[難問] 仮想問題 28: ウィンドウ関数で順位を付ける関数はどれ？",
+    "options": [
+      "RANK() OVER(...) ",
+      "COUNT()",
+      "SUM()",
+      "GROUPING()"
+    ],
+    "answerIndex": 0,
+    "explanation": "順位付けは RANK()/DENSE_RANK()/ROW_NUMBER() などのウィンドウ関数を使う。"
+  },
+  {
+    "id": "hard-029",
+    "level": "hard",
+    "question": "[難問] 仮想問題 29: ウィンドウ関数で順位を付ける関数はどれ？",
+    "options": [
+      "RANK() OVER(...) ",
+      "COUNT()",
+      "SUM()",
+      "GROUPING()"
+    ],
+    "answerIndex": 0,
+    "explanation": "順位付けは RANK()/DENSE_RANK()/ROW_NUMBER() などのウィンドウ関数を使う。"
+  },
+  {
+    "id": "hard-030",
+    "level": "hard",
+    "question": "[難問] 仮想問題 30: ウィンドウ関数で順位を付ける関数はどれ？",
+    "options": [
+      "RANK() OVER(...) ",
+      "COUNT()",
+      "SUM()",
+      "GROUPING()"
+    ],
+    "answerIndex": 0,
+    "explanation": "順位付けは RANK()/DENSE_RANK()/ROW_NUMBER() などのウィンドウ関数を使う。"
+  },
+  {
+    "id": "hard-031",
+    "level": "hard",
+    "question": "[難問] 仮想問題 31: ウィンドウ関数で順位を付ける関数はどれ？",
+    "options": [
+      "RANK() OVER(...) ",
+      "COUNT()",
+      "SUM()",
+      "GROUPING()"
+    ],
+    "answerIndex": 0,
+    "explanation": "順位付けは RANK()/DENSE_RANK()/ROW_NUMBER() などのウィンドウ関数を使う。"
+  },
+  {
+    "id": "hard-032",
+    "level": "hard",
+    "question": "[難問] 仮想問題 32: ウィンドウ関数で順位を付ける関数はどれ？",
+    "options": [
+      "RANK() OVER(...) ",
+      "COUNT()",
+      "SUM()",
+      "GROUPING()"
+    ],
+    "answerIndex": 0,
+    "explanation": "順位付けは RANK()/DENSE_RANK()/ROW_NUMBER() などのウィンドウ関数を使う。"
+  },
+  {
+    "id": "hard-033",
+    "level": "hard",
+    "question": "[難問] 仮想問題 33: ウィンドウ関数で順位を付ける関数はどれ？",
+    "options": [
+      "RANK() OVER(...) ",
+      "COUNT()",
+      "SUM()",
+      "GROUPING()"
+    ],
+    "answerIndex": 0,
+    "explanation": "順位付けは RANK()/DENSE_RANK()/ROW_NUMBER() などのウィンドウ関数を使う。"
+  },
+  {
+    "id": "hard-034",
+    "level": "hard",
+    "question": "[難問] 仮想問題 34: ウィンドウ関数で順位を付ける関数はどれ？",
+    "options": [
+      "RANK() OVER(...) ",
+      "COUNT()",
+      "SUM()",
+      "GROUPING()"
+    ],
+    "answerIndex": 0,
+    "explanation": "順位付けは RANK()/DENSE_RANK()/ROW_NUMBER() などのウィンドウ関数を使う。"
+  },
+  {
+    "id": "hard-035",
+    "level": "hard",
+    "question": "[難問] 仮想問題 35: ウィンドウ関数で順位を付ける関数はどれ？",
+    "options": [
+      "RANK() OVER(...) ",
+      "COUNT()",
+      "SUM()",
+      "GROUPING()"
+    ],
+    "answerIndex": 0,
+    "explanation": "順位付けは RANK()/DENSE_RANK()/ROW_NUMBER() などのウィンドウ関数を使う。"
+  },
+  {
+    "id": "hard-036",
+    "level": "hard",
+    "question": "[難問] 仮想問題 36: ウィンドウ関数で順位を付ける関数はどれ？",
+    "options": [
+      "RANK() OVER(...) ",
+      "COUNT()",
+      "SUM()",
+      "GROUPING()"
+    ],
+    "answerIndex": 0,
+    "explanation": "順位付けは RANK()/DENSE_RANK()/ROW_NUMBER() などのウィンドウ関数を使う。"
+  },
+  {
+    "id": "hard-037",
+    "level": "hard",
+    "question": "[難問] 仮想問題 37: ウィンドウ関数で順位を付ける関数はどれ？",
+    "options": [
+      "RANK() OVER(...) ",
+      "COUNT()",
+      "SUM()",
+      "GROUPING()"
+    ],
+    "answerIndex": 0,
+    "explanation": "順位付けは RANK()/DENSE_RANK()/ROW_NUMBER() などのウィンドウ関数を使う。"
+  },
+  {
+    "id": "hard-038",
+    "level": "hard",
+    "question": "[難問] 仮想問題 38: ウィンドウ関数で順位を付ける関数はどれ？",
+    "options": [
+      "RANK() OVER(...) ",
+      "COUNT()",
+      "SUM()",
+      "GROUPING()"
+    ],
+    "answerIndex": 0,
+    "explanation": "順位付けは RANK()/DENSE_RANK()/ROW_NUMBER() などのウィンドウ関数を使う。"
+  },
+  {
+    "id": "hard-039",
+    "level": "hard",
+    "question": "[難問] 仮想問題 39: ウィンドウ関数で順位を付ける関数はどれ？",
+    "options": [
+      "RANK() OVER(...) ",
+      "COUNT()",
+      "SUM()",
+      "GROUPING()"
+    ],
+    "answerIndex": 0,
+    "explanation": "順位付けは RANK()/DENSE_RANK()/ROW_NUMBER() などのウィンドウ関数を使う。"
+  },
+  {
+    "id": "hard-040",
+    "level": "hard",
+    "question": "[難問] 仮想問題 40: ウィンドウ関数で順位を付ける関数はどれ？",
+    "options": [
+      "RANK() OVER(...) ",
+      "COUNT()",
+      "SUM()",
+      "GROUPING()"
+    ],
+    "answerIndex": 0,
+    "explanation": "順位付けは RANK()/DENSE_RANK()/ROW_NUMBER() などのウィンドウ関数を使う。"
+  },
+  {
+    "id": "hard-041",
+    "level": "hard",
+    "question": "[難問] 仮想問題 41: ウィンドウ関数で順位を付ける関数はどれ？",
+    "options": [
+      "RANK() OVER(...) ",
+      "COUNT()",
+      "SUM()",
+      "GROUPING()"
+    ],
+    "answerIndex": 0,
+    "explanation": "順位付けは RANK()/DENSE_RANK()/ROW_NUMBER() などのウィンドウ関数を使う。"
+  },
+  {
+    "id": "hard-042",
+    "level": "hard",
+    "question": "[難問] 仮想問題 42: ウィンドウ関数で順位を付ける関数はどれ？",
+    "options": [
+      "RANK() OVER(...) ",
+      "COUNT()",
+      "SUM()",
+      "GROUPING()"
+    ],
+    "answerIndex": 0,
+    "explanation": "順位付けは RANK()/DENSE_RANK()/ROW_NUMBER() などのウィンドウ関数を使う。"
+  },
+  {
+    "id": "hard-043",
+    "level": "hard",
+    "question": "[難問] 仮想問題 43: ウィンドウ関数で順位を付ける関数はどれ？",
+    "options": [
+      "RANK() OVER(...) ",
+      "COUNT()",
+      "SUM()",
+      "GROUPING()"
+    ],
+    "answerIndex": 0,
+    "explanation": "順位付けは RANK()/DENSE_RANK()/ROW_NUMBER() などのウィンドウ関数を使う。"
+  },
+  {
+    "id": "hard-044",
+    "level": "hard",
+    "question": "[難問] 仮想問題 44: ウィンドウ関数で順位を付ける関数はどれ？",
+    "options": [
+      "RANK() OVER(...) ",
+      "COUNT()",
+      "SUM()",
+      "GROUPING()"
+    ],
+    "answerIndex": 0,
+    "explanation": "順位付けは RANK()/DENSE_RANK()/ROW_NUMBER() などのウィンドウ関数を使う。"
+  },
+  {
+    "id": "hard-045",
+    "level": "hard",
+    "question": "[難問] 仮想問題 45: ウィンドウ関数で順位を付ける関数はどれ？",
+    "options": [
+      "RANK() OVER(...) ",
+      "COUNT()",
+      "SUM()",
+      "GROUPING()"
+    ],
+    "answerIndex": 0,
+    "explanation": "順位付けは RANK()/DENSE_RANK()/ROW_NUMBER() などのウィンドウ関数を使う。"
+  },
+  {
+    "id": "hard-046",
+    "level": "hard",
+    "question": "[難問] 仮想問題 46: ウィンドウ関数で順位を付ける関数はどれ？",
+    "options": [
+      "RANK() OVER(...) ",
+      "COUNT()",
+      "SUM()",
+      "GROUPING()"
+    ],
+    "answerIndex": 0,
+    "explanation": "順位付けは RANK()/DENSE_RANK()/ROW_NUMBER() などのウィンドウ関数を使う。"
+  },
+  {
+    "id": "hard-047",
+    "level": "hard",
+    "question": "[難問] 仮想問題 47: ウィンドウ関数で順位を付ける関数はどれ？",
+    "options": [
+      "RANK() OVER(...) ",
+      "COUNT()",
+      "SUM()",
+      "GROUPING()"
+    ],
+    "answerIndex": 0,
+    "explanation": "順位付けは RANK()/DENSE_RANK()/ROW_NUMBER() などのウィンドウ関数を使う。"
+  },
+  {
+    "id": "hard-048",
+    "level": "hard",
+    "question": "[難問] 仮想問題 48: ウィンドウ関数で順位を付ける関数はどれ？",
+    "options": [
+      "RANK() OVER(...) ",
+      "COUNT()",
+      "SUM()",
+      "GROUPING()"
+    ],
+    "answerIndex": 0,
+    "explanation": "順位付けは RANK()/DENSE_RANK()/ROW_NUMBER() などのウィンドウ関数を使う。"
+  },
+  {
+    "id": "hard-049",
+    "level": "hard",
+    "question": "[難問] 仮想問題 49: ウィンドウ関数で順位を付ける関数はどれ？",
+    "options": [
+      "RANK() OVER(...) ",
+      "COUNT()",
+      "SUM()",
+      "GROUPING()"
+    ],
+    "answerIndex": 0,
+    "explanation": "順位付けは RANK()/DENSE_RANK()/ROW_NUMBER() などのウィンドウ関数を使う。"
+  },
+  {
+    "id": "hard-050",
+    "level": "hard",
+    "question": "[難問] 仮想問題 50: ウィンドウ関数で順位を付ける関数はどれ？",
+    "options": [
+      "RANK() OVER(...) ",
+      "COUNT()",
+      "SUM()",
+      "GROUPING()"
+    ],
+    "answerIndex": 0,
+    "explanation": "順位付けは RANK()/DENSE_RANK()/ROW_NUMBER() などのウィンドウ関数を使う。"
+  },
+  {
+    "id": "hard-1",
+    "level": "hard",
+    "question": "ウィンドウ関数で移動平均を計算する式はどれが適切？",
+    "options": [
+      "AVG(value) OVER()",
+      "AVG(value) OVER(ORDER BY ts ROWS BETWEEN 2 PRECEDING AND CURRENT ROW)",
+      "SUM(value) GROUP BY ts",
+      "MEDIAN(value) OVER(ORDER BY ts)"
+    ],
+    "answerIndex": 1,
+    "explanation": "移動平均は ORDER BY ts を付け、直近3行なら ROWS BETWEEN 2 PRECEDING AND CURRENT ROW。"
+  },
+  {
+    "id": "hard-2",
+    "level": "hard",
+    "question": "デッドロックを避けるための一般的な戦略は？",
+    "options": [
+      "常に FULL OUTER JOIN を使う",
+      "ロック取得順序を統一する",
+      "SELECT * を使う",
+      "トランザクションを限界まで長くする"
+    ],
+    "answerIndex": 1,
+    "explanation": "同じ順序でリソースをロックすることで循環待ちを防ぎやすい。"
+  },
+  {
+    "id": "hard-3",
+    "level": "hard",
+    "question": "実行計画で Hash Join が選ばれやすい状況は？",
+    "options": [
+      "両テーブルが極小",
+      "結合キーに高選択性インデックスがある",
+      "片方が大きくもう片方も中～大規模",
+      "ORDER BY を優先したいとき"
+    ],
+    "answerIndex": 2,
+    "explanation": "大きめのテーブル同士で結合キーのインデックスがなくてもハッシュで効率よく結合できる。"
+  },
+  {
+    "id": "hard-4",
+    "level": "hard",
+    "question": "遅いクエリ調査の第一歩として最も適切なのは？",
+    "options": [
+      "アプリを再起動する",
+      "DB を再起動する",
+      "EXPLAIN (ANALYZE) で実行計画を確認",
+      "カラムをすべて TEXT にする"
+    ],
+    "answerIndex": 2,
+    "explanation": "まず EXPLAIN (ANALYZE) で実行計画・行数推定・実測時間を確認する。"
+  },
+  {
+    "id": "hard-5",
+    "level": "hard",
+    "question": "レプリカで遅延が大きいときの緩和策として適切なのは？",
+    "options": [
+      "書き込みをすべてレプリカに送る",
+      "レプリカの適用スレッドや I/O を増強する",
+      "全インデックスを削除する",
+      "トランザクションを極端に長くする"
+    ],
+    "answerIndex": 1,
+    "explanation": "レプリカ遅延は適用のボトルネックが多い。I/O や並列適用を強化するのが一般的。"
+  }
+]
